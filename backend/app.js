@@ -1,9 +1,13 @@
 const express = require('express');
+const sequelize = require('./config/database');
+
+const userRoutes = require('./routes/user');
+
+// sequelize.sync();
 
 const app = express();
 
-app.use((req, res) => {
-    res.json({ message: 'Voilà le début de mon app.js 😋' })
-});
+app.use(express.json());
+app.use('/auth', userRoutes);
 
 module.exports = app;
