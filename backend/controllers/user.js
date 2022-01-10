@@ -19,20 +19,20 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-    User.findAll({ where: { email: req.body.email }})
+    User.findOne({ where: { email: req.body.email }})
     .then(user => {
         if (!user) {
             res.status(401).json({ message: 'Utilisateur introuvable...' })
         }
-        bcrypt.compare(req.body.password, user[0].dataValues.password)
+        bcrypt.compare(req.body.password, user.dataValues.password)
         .then(valid => {
             if (!valid) {
                 res.status(401).json({ message: 'Mot de passe incorrect !' })
             }
             res.status(200).json({
-                userId: user[0].dataValues.id,
+                userId: user.dataValues.id,
                 token: jwt.sign(
-                    {userId: user[0].dataValues.id},
+                    {userId: user.dataValues.id},
                     "my_secret_token",
                     {expiresIn: "24h"}
                 )
@@ -51,15 +51,15 @@ exports.getAllUsers = (req, res, next) => {
 };
 
 exports.modifyUser = (req, res, next) => {
-    User.findAll({ where: { id: req.params.id }})
+    User.findOne({ where: { id: req.params.id }})
     .then(user => {
-        if (user[0].dataValues.id === req.token.userId) {
+        if (user.dataValues.id === req.token.userId) {
             const userObject = req.file ? 
             {
                 ...JSON.parse(req.body.user),
                 imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
             } : {...req.body};
-            user[0].update({ ...userObject })
+            user.update({ ...userObject })
             return res.status(200).json({ message: 'Utilisateur modifié'})
         } else {
             return res.status(403).json({ error: 'Requête non authorisée !'})
@@ -69,18 +69,18 @@ exports.modifyUser = (req, res, next) => {
 };
 
 exports.deleteUser = (req, res, next) => {
-    User.findAll({ where: { id: req.params.id }})
+    User.findOne({ where: { id: req.params.id }})
     .then(user => {
-        if (user[0].dataValues.id === req.token.userId) {
+        if (user.dataValues.id === req.token.userId) {
             console.log(req.file);
             if (req.file) {
                 const filename = sauce.imageUrl.split("/images/")[1];
                 fs.unlink(`images/${filename}`, () => {
-                    user[0].destroy();
+                    user.destroy();
                     return res.status(200).json({ message: 'Utilisateur supprimé !' });
                 })
             } else {
-                user[0].destroy();
+                user.destroy();
                 return res.status(200).json({ message: 'Utilisateur supprimé !' });
             }
         } else {
