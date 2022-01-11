@@ -1,7 +1,5 @@
 const Publication = require('../models/Publication');
 const fs = require('fs');
-const UsersLiked = require('../models/Publication');
-const UsersLike = require('../models/Publication');
 
 exports.createPublication = (req, res, next) => {
     Publication.create({
@@ -22,7 +20,7 @@ exports.deletePublication = (req, res, next) => {
     Publication.findOne({ where: { id: req.params.id } })
     .then(publication => {
         if (publication.dataValues.userId === req.token.userId) {
-            publication.destroy()
+            publication.destroy();
             return res.status(200).json({ message: 'Publication supprimée !' });
         } else {
             return res.status(403).json({ error: 'Requête non authorisée !'})

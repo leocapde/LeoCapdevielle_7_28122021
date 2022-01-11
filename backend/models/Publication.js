@@ -1,6 +1,5 @@
 const { Sequelize, Model } = require('sequelize');
 const sequelize = require('../config/database');
-const User = require('./User');
 
 class Publication extends Model {}
 
