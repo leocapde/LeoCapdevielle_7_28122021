@@ -1,6 +1,18 @@
 <template>
-  <div class="about">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <h1>This is an about page</h1>
-  </div>
+    <div id="about">
+        <h1>Voilà la page "About"</h1>
+        <img id="logo" alt="Vue logo" src="../assets/icon-above-font.png">
+
+        <div id="token">{{ token }}</div>
+    </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            token: localStorage.getItem('token')
+        }
+    },
+}
+</script>
