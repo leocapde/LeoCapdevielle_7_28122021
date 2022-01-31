@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import UserServices from '../services/UserServices'
 
 export default {
   data() {
@@ -24,15 +24,7 @@ export default {
   },
   methods: {
     getLogin () {
-      axios.post('http://localhost:3000/auth/login', {
-        email: this.email,
-        password: this.password
-      })
-      .then(res => {
-        localStorage.setItem('token', res.data.token);
-        window.location = '/#/about';
-      })
-      .catch(error => console.log(error))
+      UserServices.login(this.email, this.password)
     }
   }
 }

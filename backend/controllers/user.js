@@ -43,12 +43,11 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(500).json({ error }))
 };
 
-// Permet de facilement visualiser et manipuler les utilisateurs sur Postman
-exports.getAllUsers = (req, res, next) => {
-    User.findAll()
-    .then(users => res.status(200).json( users ))
+exports.getCurrentUser = (req, res, next) => {
+    User.findOne({ where: { id: req.token.userId }})
+    .then(user => res.status(200).json( user ))
     .catch(error => res.status(400).json({ error }))
-};
+}
 
 exports.modifyUser = (req, res, next) => {
     User.findOne({ where: { id: req.params.id }})

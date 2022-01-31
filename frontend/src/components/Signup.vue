@@ -17,8 +17,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-// import UserServices from '../services/UserServices'
+import UserServices from '../services/UserServices'
 
 export default {
   data() {
@@ -31,24 +30,7 @@ export default {
   },
   methods: {
     getSignup() {
-      axios.post('http://localhost:3000/auth/signup', {
-        email: this.email,
-        password: this.password,
-        lastName: this.lastName,
-        firstName: this.firstName
-      })
-      .then(() => {
-        axios.post('http://localhost:3000/auth/login', {
-          email: this.email,
-          password: this.password
-        })
-        .then(res => {
-          localStorage.setItem('token', res.data.token);
-          window.location = '/#/about';
-        })
-        .catch(error => console.log(error))
-      })
-      .catch(error => console.log(error))
+      UserServices.signup(this.email, this.password, this.lastName, this.firstName);
     }
   }
 }

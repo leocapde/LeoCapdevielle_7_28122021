@@ -3,10 +3,11 @@
         <img id="logo" alt="Vue logo" src="../assets/icon.png">
         <h1>Bienvenu sur votre réseau social Groupomania !</h1>
 
-        <nav id="nav">
+        <nav id="home-nav">
             <button @click="homeModeLogin()">Se connecter</button> -- 
             <button @click="homeModeSignup()">S'inscrire</button>
         </nav>
+        
         <Login v-if="getHomeMode == 'login'"/>
         <Signup v-else/>
     </div>
@@ -37,6 +38,10 @@ export default {
         }
     }
 }
-
-
 </script>
+
+<style>
+#home-nav {
+  padding: 30px;
+}
+</style>

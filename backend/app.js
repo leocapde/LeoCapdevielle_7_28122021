@@ -19,6 +19,6 @@ app.use(express.json());
 
 app.use('/auth', userRoutes);
 app.use('/publications', publiationRoutes);
-app.use('/commentary', commentaryRoutes);
+app.use('/commentaries', commentaryRoutes);
 
 module.exports = app;
