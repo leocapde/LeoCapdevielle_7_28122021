@@ -9,5 +9,14 @@ export default {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
+    },
+    postPublication(description) {
+        return axios.post(`${baseUrl}/`, { 
+            description: description 
+        }, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+        } )
     }
 }

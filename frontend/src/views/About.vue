@@ -1,61 +1,50 @@
 <template>
     <div id="about">
-        <header>
-            <div>
-                <img id="logo-header" alt="Groupomania logo" src="../assets/icon-left-font.png">
-            </div>
-            <nav id="about-nav">
-                <button @click="aboutModeNews()">Accueil</button> -- 
-                <button @click="aboutModeProfil()">Profil</button>
-            </nav>
-            <button @click="getSignout()">Déconnexion</button>
-        </header>
+        <AboutHeader />
 
-        <News v-if="getAboutMode == 'news'"/>
-        <Profil v-else/>
+        <div id="about_body">
+            <PostPublication v-show="getAboutMode == 'publication'" />
+            <ShowPublication v-show="getAboutMode == 'publication'" v-for="news in getPublications()" :key="news.id" :newsId="news.id"/>
+
+            <Profil v-show="getAboutMode == 'profil'" />
+        </div>
     </div>
 </template>
 
 <script>
-import News from '../components/News.vue'
+import AboutHeader from '../components/AboutHeader.vue'
+import PostPublication from '../components/PostPublication.vue'
+import ShowPublication from '../components/ShowPublication.vue'
 import Profil from '../components/Profil.vue'
-import UserServices from '../services/UserServices'
+
+import PublicationServices from '../services/PublicationServices'
+
 import { mapState } from 'vuex'
 
 export default {
     name: 'About',
     components: {
-        News,
+        AboutHeader,
+        PostPublication,
+        ShowPublication,
         Profil
     },
     computed: {
         ...mapState({
-            getAboutMode: 'aboutMode'
+            getAboutMode: 'aboutMode',
         })
     },
     methods: {
-        getSignout() {
-            UserServices.signout()
-        },
-        aboutModeNews() {
-            this.$store.dispatch('setAboutMode', 'news')
-        },
-        aboutModeProfil() {
-            this.$store.dispatch('setAboutMode', 'profil')
+        async getPublications() {
+            await PublicationServices.getAllPublications()
         }
     }
 }
 </script>
 
 <style>
-header {
-    max-height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#logo-header {
-    height: 200px;
+#about_body {
+    max-width: 500px;
+    margin: auto;
 }
 </style>

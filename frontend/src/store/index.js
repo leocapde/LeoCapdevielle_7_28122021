@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     homeMode: 'login',
-    aboutMode: 'news'
+    aboutMode: 'publication'
   },
   mutations: {
     SET_HOME_MODE(state, payload){

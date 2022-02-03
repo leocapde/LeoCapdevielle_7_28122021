@@ -28,8 +28,15 @@ export default {
         localStorage.removeItem('token');
         window.location = '../'
     },
-    getUser() {
+    getCurrentUser() {
         return axios.get(`${baseUrl}/`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+    },
+    getOneUser(userId) {
+        return axios.get(`${baseUrl}/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
