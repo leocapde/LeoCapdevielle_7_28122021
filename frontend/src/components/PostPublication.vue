@@ -27,9 +27,9 @@ export default {
 #post_publication {
     border: 1px solid green;
     padding: 10px;
-    margin: 10px 0;
     display: flex;
-
+    border-radius: 20px;
+    margin: 10px 0;
 }
 
 </style>

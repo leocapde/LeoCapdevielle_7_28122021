@@ -4,9 +4,10 @@
 
         <div id="about_body">
             <PostPublication v-show="getAboutMode == 'publication'" />
-            <ShowPublication v-show="getAboutMode == 'publication'" v-for="news in getPublications()" :key="news.id" :newsId="news.id"/>
+            <ShowPublication v-show="getAboutMode == 'publication'" />
 
             <Profil v-show="getAboutMode == 'profil'" />
+            <ProfilPublication v-show="getAboutMode == 'profil'" />
         </div>
     </div>
 </template>
@@ -16,8 +17,7 @@ import AboutHeader from '../components/AboutHeader.vue'
 import PostPublication from '../components/PostPublication.vue'
 import ShowPublication from '../components/ShowPublication.vue'
 import Profil from '../components/Profil.vue'
-
-import PublicationServices from '../services/PublicationServices'
+import ProfilPublication from '../components/ProfilPublication.vue'
 
 import { mapState } from 'vuex'
 
@@ -27,17 +27,13 @@ export default {
         AboutHeader,
         PostPublication,
         ShowPublication,
-        Profil
+        Profil,
+        ProfilPublication
     },
     computed: {
         ...mapState({
             getAboutMode: 'aboutMode',
         })
-    },
-    methods: {
-        async getPublications() {
-            await PublicationServices.getAllPublications()
-        }
     }
 }
 </script>
