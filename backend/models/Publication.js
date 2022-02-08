@@ -10,19 +10,14 @@ Publication.init({
         autoIncrement: true,
         primaryKey: true
     },
-    userId: { type: Sequelize.INTEGER, allowNull: false },
     description: { type: Sequelize.STRING },
-    // fileUrl: { type: Sequelize.STRING },
-    likes: {type: Sequelize.INTEGER, defaultValue: 0 },
-    dislikes: {type: Sequelize.INTEGER, defaultValue: 0 },
-    // usersLiked: [ { type: Sequelize.STRING } ],
-    // usersDisliked: [ { type: Sequelize.STRING } ]
+    fileUrl: { type: Sequelize.STRING }
 }, {
     sequelize,
     modelName: 'Publication',
     timestamps: true,
     createdAt: true,
-    updatedAt: false
+    updatedAt: false,
 })
 
 module.exports = Publication;

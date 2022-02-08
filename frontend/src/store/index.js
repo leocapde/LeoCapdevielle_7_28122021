@@ -20,12 +20,7 @@ export default new Vuex.Store({
     },
     SET_PUBLICATION_LIST(state, payload){
       state.publicationList = payload;
-    },
-    FORMATE_PUBLICATION_LIST(){
-      // Ici pour formater l'userId et le createdAt
-      // Ajouter les éléments firstName, lastName, date, heures
-      // Ceci sans créer également la liste des utilisateurs et de la recroisser avec celle des publications dans les components
-      
+      console.log(state.publicationList)
     }
   },
   actions: {

@@ -1,5 +1,7 @@
 const { Sequelize, Model } = require('sequelize');
 const sequelize = require('../config/database');
+const Publication = require('./Publication')
+const Commentary = require('./Commentary')
 
 class User extends Model {}
 
@@ -14,9 +16,11 @@ User.init({
     password: { type: Sequelize.STRING, allowNull: false },
     lastName: { type: Sequelize.STRING, allowNull: false },
     firstName: { type: Sequelize.STRING, allowNull: false },
-    isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false }
-    // ,
-    // imageUrl: { type: Sequelize.STRING }
+    isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
+    imageUrl: { type: Sequelize.STRING },
+    age: { type: Sequelize.INTEGER },
+    job: { type: Sequelize.STRING },
+    description: { type: Sequelize.STRING }
 }, {
     sequelize,
     modelName: 'User',
@@ -24,5 +28,12 @@ User.init({
     createdAt: false,
     updatedAt: false
 });
+
+User.hasMany(Publication)
+User.hasMany(Commentary)
+Publication.hasMany(Commentary)
+Publication.belongsTo(User)
+Commentary.belongsTo(User)
+Commentary.belongsTo(Publication)
 
 module.exports = User;

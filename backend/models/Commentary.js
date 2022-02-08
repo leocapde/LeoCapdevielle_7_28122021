@@ -10,8 +10,6 @@ Commentary.init({
         autoIncrement: true,
         primaryKey: true
     },
-    userId: { type: Sequelize.INTEGER, allowNull: false },
-    publicationId: { type: Sequelize.INTEGER, allowNull: false},
     description: { type: Sequelize.STRING, allowNull: false }
 }, {
     sequelize,

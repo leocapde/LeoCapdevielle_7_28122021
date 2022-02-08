@@ -1,9 +1,11 @@
 const Publication = require('../models/Publication');
+const User = require('../models/User')
+const Commentary = require('../models/Commentary')
 const fs = require('fs');
 
 exports.createPublication = (req, res, next) => {
     Publication.create({
-        userId: req.token.userId,
+        UserId: req.token.userId,
         description: req.body.description
     })
     .then(() => res.status(201).json({ message: 'Nouvel publication créée !' }))
@@ -11,7 +13,12 @@ exports.createPublication = (req, res, next) => {
 };
 
 exports.getAllPublications = (req, res, next) => {
-    Publication.findAll()
+    Publication.findAll({
+        include: User, 
+        order: [
+            ["createdAt", "DESC"]
+        ] 
+    })
     .then(publications => res.status(200).json( publications ))
     .catch(error => res.status(400).json({ error }))
 };

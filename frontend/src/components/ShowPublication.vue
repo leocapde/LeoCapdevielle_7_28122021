@@ -1,12 +1,10 @@
 <template>
     <div id="show_publications">
         <div class="publication" v-for="publication in publicationList" :key="publication.id">
-            <!-- <div v-for="user in userList" :key="user.id">
-                <h4  v-if="publication.userId == user.id">
-                    {{ user.firstName }} {{ user.lastName }}
-                </h4>
-            </div> -->
-            <h4>{{ publication.userId }}</h4>
+            <p>{{ publication.UserId }}</p>
+            <h4> <!-- Imposible de récupérer précisemment les infos dans l'objet publication.User -->
+                {{ publication.User }}
+            </h4>
             <p>{{ publication.description }}</p>
             <p>{{ publication.createdAt }}</p>
         </div>

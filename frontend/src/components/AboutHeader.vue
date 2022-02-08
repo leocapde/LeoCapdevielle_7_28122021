@@ -4,8 +4,8 @@
                 <img id="logo-about_header" alt="Groupomania logo" src="../assets/icon-left-font.png">
             </div>
             <nav id="about-nav">
-                <button @click="aboutModePubication()">Accueil</button> -- 
-                <button @click="aboutModeProfil()">Profil</button>
+                <button @click="aboutModePubication()">Fil d'actualité</button> -- 
+                <button @click="aboutModeProfil()">Mon profil</button>
             </nav>
             <button @click="getSignout()">Déconnexion</button>
         </div>
