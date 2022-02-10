@@ -1,20 +1,23 @@
 <template>
     <div id="show_publications">
         <div class="publication" v-for="publication in publicationList" :key="publication.id">
-            <p>{{ publication.UserId }}</p>
-            <h4> <!-- Imposible de récupérer précisemment les infos dans l'objet publication.User -->
-                {{ publication.User }}
-            </h4>
+            <h4>{{ publication.User.firstName }} {{ publication.User.lastName }}</h4>
             <p>{{ publication.description }}</p>
             <p>{{ publication.createdAt }}</p>
+            <Commentaries :commentaries="publication.Commentaries" :publicationId="publication.id"/>
         </div>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Commentaries from '../components/Commentaries.vue'
+
 
 export default {
+    components: {
+        Commentaries
+    },
     mounted() {
         this.$store.dispatch('setPublicationList')
     },

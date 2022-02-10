@@ -24,21 +24,25 @@ exports.login = (req, res, next) => {
         if (!user) {
             res.status(401).json({ message: 'Utilisateur introuvable...' })
         }
-        bcrypt.compare(req.body.password, user.dataValues.password)
-        .then(valid => {
-            if (!valid) {
-                res.status(401).json({ message: 'Mot de passe incorrect !' })
-            }
-            res.status(200).json({
-                userId: user.dataValues.id,
-                token: jwt.sign(
-                    {userId: user.dataValues.id},
-                    "my_secret_token",
-                    {expiresIn: "24h"}
-                )
+        else {
+            bcrypt.compare(req.body.password, user.dataValues.password)
+            .then(valid => {
+                if (!valid) {
+                    res.status(401).json({ message: 'Mot de passe incorrect !' })
+                }
+                else {
+                    res.status(200).json({
+                        userId: user.dataValues.id,
+                        token: jwt.sign(
+                            {userId: user.dataValues.id},
+                            "my_secret_token",
+                            {expiresIn: "24h"}
+                        )
+                })
+                }
             })
-        })
-        .catch(error => res.status(500).json({ error }))
+            .catch(error => res.status(500).json({ error }))
+        }
     })
     .catch(error => res.status(500).json({ error }))
 };

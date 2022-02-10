@@ -29,10 +29,10 @@ User.init({
     updatedAt: false
 });
 
-User.hasMany(Publication)
-User.hasMany(Commentary)
-Publication.hasMany(Commentary)
+User.hasMany(Publication, { onDelete: 'CASCADE', hooks: true })
+User.hasMany(Commentary, { onDelete: 'CASCADE', hooks: true })
 Publication.belongsTo(User)
+Publication.hasMany(Commentary, { onDelete: 'CASCADE', hooks: true })
 Commentary.belongsTo(User)
 Commentary.belongsTo(Publication)
 

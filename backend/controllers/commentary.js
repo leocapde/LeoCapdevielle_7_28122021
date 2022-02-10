@@ -3,7 +3,7 @@ const Commentary = require('../models/Commentary');
 exports.createCommentary = (req, res, next) => {
     Commentary.create({
         UserId: req.token.userId,
-        PublicationId: req.params.id,
+        PublicationId: req.body.publicationId,
         description: req.body.description
     })
     .then(() => res.status(201).json({ message: 'Nouveau commentaire ajouté !' }))

@@ -13,11 +13,25 @@ exports.createPublication = (req, res, next) => {
 };
 
 exports.getAllPublications = (req, res, next) => {
-    Publication.findAll({
-        include: User, 
+    const userAttributes = ['id', 'firstName', 'lastName']
+    Publication.findAll({ 
         order: [
-            ["createdAt", "DESC"]
-        ] 
+            ['createdAt', 'DESC'],
+            [Commentary, 'createdAt', 'ASC']
+        ],
+        include: [
+            { 
+                model: User, 
+                attributes: userAttributes 
+            },
+            { 
+                model: Commentary, 
+                include: { 
+                    model: User,
+                    attributes: userAttributes
+                } 
+            }
+        ]
     })
     .then(publications => res.status(200).json( publications ))
     .catch(error => res.status(400).json({ error }))
