@@ -8,6 +8,8 @@
 <script>
 import CommentaryServices from '../services/CommentaryServices'
 
+import { mapState, mapActions } from 'vuex'
+
 export default {
     data() {
         return {
@@ -20,13 +22,23 @@ export default {
             required: true
         }
     },
+    computed: {
+        ...mapState({
+            // userProfil: 'userProfil',
+            // publicationList: 'publicationList'
+        })
+    },
     methods: {
-        async postNewCommentary() {
-            await CommentaryServices.postCommentary(this.description, this.publicationId)
-            // Modifier la route et le controller postCommentary.js
-            // Enlever le req.params.id
-            // Rajouter le publicationId dans le body via la method dans CommentaryServices
+        ...mapActions({
+            // setUserProfil: 'setUserProfil',
+            // setUserPublicationList: 'setUserPublicationList'
+        }),
+        postNewCommentary() {
+            CommentaryServices.postCommentary(this.description, this.publicationId)
             location.reload()
+            // this.setUserProfil(this.userProfil)
+            // this.setUserPublicationList(this.userProfil)
+            // console.log(this.publicationList)
         }
     }
 }

@@ -7,6 +7,7 @@ const multer = require('../middlewares/multer-config');
 
 router.post('/', auth, multer, publiationCtrl.createPublication);
 router.get('/', auth, publiationCtrl.getAllPublications);
+router.get('/:id', auth, publiationCtrl.getAllUserPublications);
 // Est-il nécessaire de créer une route pour modifier une publication ?
 router.delete('/:id', auth, multer, publiationCtrl.deletePublication);
 

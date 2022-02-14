@@ -10,6 +10,7 @@ export default {
         })
         .then(res => {
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('userId', res.data.userId);
             window.location = '/#/about';
           })
         .catch(error => console.log(error))
@@ -28,15 +29,8 @@ export default {
         localStorage.removeItem('token');
         window.location = '../'
     },
-    getCurrentUser() {
-        return axios.get(`${baseUrl}/`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-    },
-    getOneUser(userId) {
-        return axios.get(`${baseUrl}/${userId}`, {
+    getOneUser(userIdProfil) {
+        return axios.get(`${baseUrl}/${userIdProfil}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }

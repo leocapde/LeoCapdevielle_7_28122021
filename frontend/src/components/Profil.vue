@@ -8,18 +8,34 @@
 <script>
 import UserServices from '../services/UserServices'
 
+import { mapState } from 'vuex'
+
 export default {
     data() {
         return {
             user: []
         }
     },
+    props: {
+        profilId: { required: true }
+    },
+    watch: {
+        profilId() {
+            this.getUserProfil()
+        }
+    },
     mounted() {
-        this.getUser()
+        this.getUserProfil()
+    },
+    computed: {
+        ...mapState({
+            userProfil: 'userProfil'
+        })
     },
     methods: {
-        async getUser() {
-            const user = await UserServices.getCurrentUser()
+        async getUserProfil() {
+            const profilId = this.profilId
+            const user = await UserServices.getOneUser(profilId)
             return this.user = user.data
         }
     }

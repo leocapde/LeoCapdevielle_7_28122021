@@ -4,8 +4,8 @@
                 <img id="logo-about_header" alt="Groupomania logo" src="../assets/icon-left-font.png">
             </div>
             <nav id="about-nav">
-                <button @click="aboutModePubication()">Fil d'actualité</button> -- 
-                <button @click="aboutModeProfil()">Mon profil</button>
+                <button @click="setUserProfil('')">Fil d'actualité</button> -- 
+                <button @click="setUserProfil(currentUser)">Mon profil</button>
             </nav>
             <button @click="getSignout()">Déconnexion</button>
         </div>
@@ -13,24 +13,26 @@
 
 <script>
 import UserServices from '../services/UserServices'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
+    data() {
+        return {
+            currentUser: localStorage.getItem('userId')
+        }
+    },
     computed: {
         ...mapState({
-            getAboutMode: 'aboutMode'
+
         })
     },
     methods: {
         getSignout() {
             UserServices.signout()
         },
-        aboutModePubication() {
-            this.$store.dispatch('setAboutMode', 'publication')
-        },
-        aboutModeProfil() {
-            this.$store.dispatch('setAboutMode', 'profil')
-        }
+        ...mapActions({
+            setUserProfil: 'setUserProfil'
+        })
     }
 }
 </script>

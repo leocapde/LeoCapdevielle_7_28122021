@@ -1,7 +1,7 @@
 <template>
     <div id="commentaries">
-        <PostCommentary :publicationId="publicationId"/>
         <ShowCommentaries :commentaries="commentaries" v-if="commentaries.length != 0"/>
+        <PostCommentary :publicationId="publicationId"/>
     </div>
 </template>
 

@@ -10,6 +10,13 @@ export default {
             }
         })
     },
+    getAllUserPublications(userId) {
+        return axios.get(`${baseUrl}/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+    },
     postPublication(description) {
         return axios.post(`${baseUrl}/`, { 
             description: description 

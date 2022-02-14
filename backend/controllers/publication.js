@@ -37,6 +37,32 @@ exports.getAllPublications = (req, res, next) => {
     .catch(error => res.status(400).json({ error }))
 };
 
+exports.getAllUserPublications = (req, res, next) => {
+    const userAttributes = ['id', 'firstName', 'lastName']
+    Publication.findAll({ 
+        where: { UserId: req.params.id },
+        order: [
+            ['createdAt', 'DESC'],
+            [Commentary, 'createdAt', 'ASC']
+        ],
+        include: [
+            { 
+                model: User, 
+                attributes: userAttributes 
+            },
+            { 
+                model: Commentary, 
+                include: { 
+                    model: User,
+                    attributes: userAttributes
+                } 
+            }
+        ]
+    })
+    .then(publications => res.status(200).json( publications ))
+    .catch(error => res.status(400).json({ error }))
+};
+
 exports.deletePublication = (req, res, next) => {
     Publication.findOne({ where: { id: req.params.id } })
     .then(publication => {

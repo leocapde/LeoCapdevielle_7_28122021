@@ -3,11 +3,10 @@
         <AboutHeader />
 
         <div id="about_body">
-            <PostPublication v-show="getAboutMode == 'publication'" />
-            <ShowPublication v-show="getAboutMode == 'publication'" />
+            <PostPublication v-if="!userProfil" />
+            <Profil v-else :profilId="userProfil"/>
 
-            <Profil v-show="getAboutMode == 'profil'" />
-            <ProfilPublication v-show="getAboutMode == 'profil'" />
+            <ShowPublication :profilId="userProfil" />
         </div>
     </div>
 </template>
@@ -17,7 +16,6 @@ import AboutHeader from '../components/AboutHeader.vue'
 import PostPublication from '../components/PostPublication.vue'
 import ShowPublication from '../components/ShowPublication.vue'
 import Profil from '../components/Profil.vue'
-import ProfilPublication from '../components/ProfilPublication.vue'
 
 import { mapState } from 'vuex'
 
@@ -28,11 +26,10 @@ export default {
         PostPublication,
         ShowPublication,
         Profil,
-        ProfilPublication
     },
     computed: {
         ...mapState({
-            getAboutMode: 'aboutMode',
+            userProfil: 'userProfil'
         })
     }
 }
