@@ -11,18 +11,13 @@
 
 <script>
 import UserServices from '../services/UserServices'
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     data() {
         return {
             currentUser: localStorage.getItem('userId')
         }
-    },
-    computed: {
-        ...mapState({
-
-        })
     },
     methods: {
         getSignout() {

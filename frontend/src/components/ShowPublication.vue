@@ -3,8 +3,7 @@
         <div class="publication" v-for="publication in publicationList" :key="publication.id">
             <div class="publication-header">
                 <div class="publication-header_name" @click="setUserProfil(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
-                <!-- <div class="publication-header_date">{{ formateDate(publication.createdAt) }}</div> -->
-                <div class="publication-header_date" v-bind="formateDate(publication.createdAt)">{{ formatedDate }}</div>
+                <div class="publication-header_date">{{ publication.createdAt | formatDate }}</div>
             </div>
             <div class="publication-body">
                 <div class="publication-body_description">{{ publication.description }}</div>
@@ -17,8 +16,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import Commentaries from '../components/Commentaries.vue'
-
-// import moment from 'moment'
 
 export default {
     components: {
@@ -42,17 +39,12 @@ export default {
     computed: {
         ...mapState({
             publicationList: 'publicationList',
-            formatedDate: 'formatedDate',
         })
     },
     methods: {
-        // formateDate(date) {
-        //     return moment(date).locale('fr').calendar()
-        // },
         ...mapActions({
             setPublicationList: 'setPublicationList',
             setUserPublicationList: 'setUserPublicationList',
-            formateDate: 'formateDate',
             setUserProfil: 'setUserProfil'
         })
     }

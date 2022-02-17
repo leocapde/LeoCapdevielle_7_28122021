@@ -3,8 +3,7 @@
         <div class="commentary" v-for="commentary in commentaries" :key="commentary.id">
             <div class="commentary-header">
                 <div class="commentary-header_name" @click="setUserProfil(commentary.UserId)">{{ commentary.User.firstName }} {{ commentary.User.lastName }}</div>
-                <!-- <div class="commentary-header_date">{{ commentary.createdAt }}</div> -->
-                <div class="commentary-header_date" v-bind="formateDate(commentary.createdAt)">{{ formatedDate }}</div>
+                <div class="commentary-header_date">{{ commentary.createdAt | formatDate }}</div>
             </div>
             <div class="commentary-body">{{ commentary.description }}</div>
         </div>
@@ -12,7 +11,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     props: {
@@ -21,14 +20,8 @@ export default {
             required: true
         }
     },
-    computed: {
-        ...mapState({
-            formatedDate: 'formatedDate'
-        })
-    },
     methods: {
         ...mapActions({
-            formateDate: 'formateDate',
             setUserProfil: 'setUserProfil'
         })
     }

@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import moment from 'moment'
-
 import PublicationServices from '../services/PublicationServices'
 
 Vue.use(Vuex)
@@ -13,7 +11,6 @@ export default new Vuex.Store({
     aboutMode: 'publication',
     userProfil: '',
     publicationList: [],
-    formatedDate: '',
   },
   mutations: {
     SET_HOME_MODE(state, payload){
@@ -24,10 +21,6 @@ export default new Vuex.Store({
     },
     SET_PUBLICATION_LIST(state, payload){
       state.publicationList = payload
-    },
-    FORMATE_DATE(state, payload) {
-      state.formatedDate = moment(payload).locale('fr').calendar()
-      // console.log(state.formatedDate)
     }
   },
   actions: {
@@ -36,6 +29,7 @@ export default new Vuex.Store({
     },
     setUserProfil(context, payload) {
       context.commit('SET_USER_ID_PROFIL', payload)
+      window.location = '#app'
     },
     async setPublicationList(context) {
       const publications = await PublicationServices.getAllPublications()
@@ -44,9 +38,6 @@ export default new Vuex.Store({
     async setUserPublicationList(context, userId) {
       const userPublications = await PublicationServices.getAllUserPublications(userId)
       context.commit('SET_PUBLICATION_LIST', userPublications.data)
-    },
-    formateDate(context, payload) {
-      context.commit('FORMATE_DATE', payload)
     }
   }
 })
