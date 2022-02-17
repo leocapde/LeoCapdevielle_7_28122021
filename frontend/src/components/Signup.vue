@@ -1,6 +1,6 @@
 <template>
   <div id="signup">
-    <h1>Inscription</h1>
+    <!-- <h1>Inscription</h1> -->
     <form id="signup-form" @submit.prevent>
       <label for="email">Email :</label>
       <input type="email" name="email" v-model="email">
@@ -10,7 +10,7 @@
       <input type="text" name="lastName" v-model="lastName">
       <label for="firstName">Prénom :</label>
       <input type="text" name="firstName" v-model="firstName">
-      <button @click="getSignup()">S'inscrire</button>
+      <button id="login-button" @click="getSignup()">S'inscrire</button>
       <br>
     </form>
   </div>
@@ -38,10 +38,12 @@ export default {
 
 <style>
 #signup {
-  border: 1px solid red;
-  border-radius: 20px;
+  border: 2px solid black;
+  border-radius: 0 0 20px 20px;
+  background: #EFEFEF;
   max-width: 550px;
   margin: auto;
+  padding: 30px 10px 0;
 }
 
 #signup-form {

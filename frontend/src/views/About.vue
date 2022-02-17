@@ -37,7 +37,7 @@ export default {
 
 <style>
 #about_body {
-    max-width: 500px;
+    max-width: 650px;
     margin: auto;
 }
 </style>

@@ -29,14 +29,10 @@ export default {
 
 <style>
 #commentaries {
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     border-radius: 20px;
     margin: 10px;
+    padding: 1px 0;
     background: gray;
-}
-
-#postId {
-    color: white;
-    font-weight: bold;
 }
 </style> 

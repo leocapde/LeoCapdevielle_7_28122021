@@ -46,12 +46,22 @@ export default {
 
 <style>
 #post_commentary {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     padding: 10px;
     display: flex;
     border-radius: 20px;
     margin: 10px;
     background: lightgrey;
+    box-shadow: 2px 2px 10px;
+}
+
+#post_commentary textarea {
+    border-radius: 20px 0 0 20px;
+    padding: 10px;
+}
+
+#post_commentary button {
+    border-radius: 0 20px 20px 0;
 }
 
 </style>

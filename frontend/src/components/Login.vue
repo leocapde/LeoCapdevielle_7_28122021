@@ -1,12 +1,12 @@
 <template>
   <div id="login">
-    <h1>Connection</h1>
+    <!-- <h1>Connection</h1> -->
     <form id="login-form" @submit.prevent>
       <label for="email">Email :</label>
       <input type="email" name="email" v-model="email">
       <label for="password">Mot de passe :</label>
       <input type="password" name="password" v-model="password">
-      <button @click="getLogin()">Se connecter</button>
+      <button id="login-button" @click="getLogin()">Se connecter</button>
       <br>
     </form>
   </div>
@@ -32,10 +32,12 @@ export default {
 
 <style>
 #login {
-  border: 1px solid blue;
-  border-radius: 20px;
+  border: 2px solid black;
+  border-radius: 0 0 20px 20px;
+  background: #EFEFEF;
   max-width: 550px;
   margin: auto;
+  padding: 30px 10px 0;
 }
 
 #login-form {

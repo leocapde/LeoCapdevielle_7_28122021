@@ -25,11 +25,22 @@ export default {
 
 <style>
 #post_publication {
-    border: 1px solid green;
+    border: 1px solid black;
     padding: 10px;
     display: flex;
     border-radius: 20px;
     margin: 10px 0;
+    background: #FFD7D7;
+    box-shadow: 2px 2px 10px;
+}
+
+#post_publication textarea {
+    border-radius: 20px 0 0 20px;
+    padding: 10px;
+}
+
+#post_publication button {
+    border-radius: 0 20px 20px 0;
 }
 
 </style>

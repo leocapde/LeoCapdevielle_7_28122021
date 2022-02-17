@@ -44,8 +44,10 @@ export default {
 
 <style>
 #profil {
-    border: 1px solid green;
+    border: 1px solid black;
     border-radius: 20px;
     margin: 10px 0;
+    background: #FFD7D7;
+    box-shadow: 2px 2px 10px;
 }
 </style>

@@ -1,13 +1,11 @@
 <template>
     <div id="about_header">
-            <div>
-                <img id="logo-about_header" alt="Groupomania logo" src="../assets/icon-left-font.png">
-            </div>
+            <img id="logo-about_header" alt="Groupomania logo" src="../assets/icon-left-font-monochrome-white.png">
             <nav id="about-nav">
-                <button @click="setUserProfil('')">Fil d'actualité</button> -- 
+                <button @click="setUserProfil('')">Fil d'actualité</button>
                 <button @click="setUserProfil(currentUser)">Mon profil</button>
+                <button @click="getSignout()">Déconnexion</button>
             </nav>
-            <button @click="getSignout()">Déconnexion</button>
         </div>
 </template>
 
@@ -44,9 +42,21 @@ export default {
     justify-content: space-between;
     align-items: center;
     border: 1px solid black;
+    padding: 0 20px;
+    background: #BA4D55;
 }
 
 #logo-about_header {
-    height: 200px;
+    max-width: 200px;
+}
+
+#about-nav button {
+    margin: 0 5px;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+#about-nav button:hover {
+    background: #FFD7D7;
 }
 </style>
