@@ -21,6 +21,7 @@ export default new Vuex.Store({
     },
     SET_PUBLICATION_LIST(state, payload){
       state.publicationList = payload
+      // console.log(state.publicationList)
     }
   },
   actions: {
@@ -29,7 +30,7 @@ export default new Vuex.Store({
     },
     setUserProfil(context, payload) {
       context.commit('SET_USER_ID_PROFIL', payload)
-      window.location = '#app'
+      window.scroll(top)
     },
     async setPublicationList(context) {
       const publications = await PublicationServices.getAllPublications()

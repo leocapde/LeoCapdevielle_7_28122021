@@ -13,7 +13,7 @@ exports.createPublication = (req, res, next) => {
 };
 
 exports.getAllPublications = (req, res, next) => {
-    const userAttributes = ['id', 'firstName', 'lastName']
+    const userAttributes = ['id', 'firstName', 'lastName', 'imageUrl']
     Publication.findAll({ 
         order: [
             ['createdAt', 'DESC'],
@@ -38,7 +38,7 @@ exports.getAllPublications = (req, res, next) => {
 };
 
 exports.getAllUserPublications = (req, res, next) => {
-    const userAttributes = ['id', 'firstName', 'lastName']
+    const userAttributes = ['id', 'firstName', 'lastName', 'imageUrl']
     Publication.findAll({ 
         where: { UserId: req.params.id },
         order: [

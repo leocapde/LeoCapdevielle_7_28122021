@@ -2,8 +2,11 @@
     <div id="show_publications">
         <div class="publication" v-for="publication in publicationList" :key="publication.id">
             <div class="publication-header">
-                <div class="publication-header_name" @click="setUserProfil(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
-                <div class="publication-header_date">{{ publication.createdAt | formatDate }}</div>
+                <ImageProfil :imageUrl="publication.User.imageUrl" />
+                <div class="publication-header-infos">
+                    <div class="publication-header_name" @click="setUserProfil(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
+                    <div class="publication-header_date">{{ publication.createdAt | formatDate }}</div>
+                </div>
             </div>
             <div class="publication-body">
                 <div class="publication-body_description">{{ publication.description }}</div>
@@ -16,10 +19,12 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import Commentaries from '../components/Commentaries.vue'
+import ImageProfil from '../components/ImageProfil.vue'
 
 export default {
     components: {
-        Commentaries
+        Commentaries,
+        ImageProfil
     },
     props: {
         profilId: {}
@@ -67,6 +72,9 @@ export default {
     width: 100%;
     padding: 10px;
     text-align: start;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 .publication-header_name {
