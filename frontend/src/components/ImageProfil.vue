@@ -1,7 +1,7 @@
 <template>
     <div id="image-profil">
         <img alt="photo de profil" :src="imageUrl" v-if="imageUrl">
-        <img alt="photo de profil" src="http://localhost:8080/img/logo.82b9c7a5.png" v-else>
+        <img alt="photo de profil" src="../assets/images/icon-above-font.png" v-else>
     </div>
 </template>
 
@@ -16,8 +16,8 @@ export default {
 
 <style>
 #image-profil > img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border: 2px solid black;
     border-radius: 50px;
     margin-right: 10px;

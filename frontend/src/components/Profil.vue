@@ -1,58 +1,56 @@
 <template>
     <div id="profil">
         <div id="profil-header">
-            <ImageProfil :imageUrl="user.imageUrl" />
-            <div id="profil-name">{{ user.firstName }} {{ user.lastName}}</div>
+            <ImageProfil :imageUrl="userProfil.imageUrl" />
+            <div id="profil-name">{{ userProfil.firstName }} {{ userProfil.lastName}}</div>
         </div>
-        <div id="profil-email" v-if="user.email">
-            <span class="profil-span">Email: </span>{{ user.email }}
+        <div id="profil-age" v-if="userProfil.age">
+            <span class="profil-span">Age: </span>{{ userProfil.age }} ans
         </div>
-        <div id="profil-job" v-if="user.job">
-            <span class="profil-span">Poste occupé: </span>{{ user.job }}
+        <div id="profil-email" v-if="userProfil.email">
+            <span class="profil-span">Email: </span>{{ userProfil.email }}
         </div>
-        <div id="profil-description" v-if="user.description">
-            <span class="profil-span">Biographie: </span>{{ user.description }}
+        <div id="profil-job" v-if="userProfil.job">
+            <span class="profil-span">Poste occupé: </span>{{ userProfil.job }}
         </div>
+        <div id="profil-description" v-if="userProfil.description">
+            <span class="profil-span">Biographie: </span>{{ userProfil.description }}
+        </div>
+        <button id="profil-update-button" @click="setProfilModification(true)">Modifier le profil</button>
     </div>
 </template>
 
 <script>
-import UserServices from '../services/UserServices'
 import ImageProfil from '../components/ImageProfil.vue'
 
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
     components: {
         ImageProfil
-    },
-    data() {
-        return {
-            user: []
-        }
     },
     props: {
         profilId: { required: true }
     },
     watch: {
         profilId() {
-            this.getUserProfil()
+            this.setUserProfil(this.profilId)
         }
     },
     mounted() {
-        this.getUserProfil()
+        this.setUserProfil(this.profilId)
     },
     computed: {
         ...mapState({
-            userProfil: 'userProfil'
+            userProfil: 'userProfil',
+            profilModification: 'profilModification'
         })
     },
     methods: {
-        async getUserProfil() {
-            const profilId = this.profilId
-            const user = await UserServices.getOneUser(profilId)
-            return this.user = user.data
-        }
+        ...mapActions({
+            setProfilModification: 'setProfilModification',
+            setUserProfil: 'setUserProfil'
+        })
     }
 }
 </script>
@@ -90,6 +88,17 @@ export default {
 #profil-name {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+#profil-update-button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    background: lightgray;
+}
+
+#profil-update-button:hover {
+    font-style: italic;
 }
 
 .profil-span {

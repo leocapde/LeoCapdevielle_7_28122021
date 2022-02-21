@@ -4,7 +4,7 @@
             <div class="commentary-header">
                 <ImageProfil :imageUrl="commentary.User.imageUrl" />
                 <div class="commentary-header_infos">
-                    <div class="commentary-header_name" @click="setUserProfil(commentary.UserId)">{{ commentary.User.firstName }} {{ commentary.User.lastName }}</div>
+                    <div class="commentary-header_name" @click="setProfilId(commentary.UserId)">{{ commentary.User.firstName }} {{ commentary.User.lastName }}</div>
                     <div class="commentary-header_date">{{ commentary.createdAt | formatDate }}</div>
                 </div>
             </div>
@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         ...mapActions({
-            setUserProfil: 'setUserProfil'
+            setProfilId: 'setProfilId'
         })
     }
 }

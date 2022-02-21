@@ -4,7 +4,7 @@
             <div class="publication-header">
                 <ImageProfil :imageUrl="publication.User.imageUrl" />
                 <div class="publication-header-infos">
-                    <div class="publication-header_name" @click="setUserProfil(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
+                    <div class="publication-header_name" @click="setProfilId(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
                     <div class="publication-header_date">{{ publication.createdAt | formatDate }}</div>
                 </div>
             </div>
@@ -50,7 +50,7 @@ export default {
         ...mapActions({
             setPublicationList: 'setPublicationList',
             setUserPublicationList: 'setUserPublicationList',
-            setUserProfil: 'setUserProfil'
+            setProfilId: 'setProfilId'
         })
     }
 }

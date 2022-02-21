@@ -1,7 +1,7 @@
 <template>
     <div id="home">
         <div id="home-header">
-            <img id="logo" alt="Vue logo" src="../assets/icon.png">
+            <img id="logo" alt="Vue logo" src="../assets/images/icon.png">
             <h1>Bienvenu sur votre réseau social Groupomania !</h1>
         </div>
         

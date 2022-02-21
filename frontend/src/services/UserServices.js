@@ -35,5 +35,21 @@ export default {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
+    },
+    modifyUser(userId, email, password, lastName, firstName, imageUrl, age, job, description) {
+        return axios.put(`${baseUrl}/${userId}`, {
+            email: email,
+            password: password,
+            lastName: lastName,
+            firstName: firstName,
+            imageUrl: imageUrl,
+            age: age,
+            job: job,
+            description: description
+        }, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
     }
 }
