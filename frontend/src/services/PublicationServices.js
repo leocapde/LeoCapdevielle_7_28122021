@@ -25,5 +25,12 @@ export default {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         } )
+    },
+    deletePublication(publicationId) {
+        return axios.delete(`${baseUrl}/${publicationId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
     }
 }

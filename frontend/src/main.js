@@ -11,6 +11,13 @@ Vue.filter('formatDate', (date) => {
   }
 })
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faEllipsis)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 Vue.config.productionTip = false
 
 new Vue({

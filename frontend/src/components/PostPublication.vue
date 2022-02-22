@@ -43,4 +43,7 @@ export default {
     border-radius: 0 20px 20px 0;
 }
 
+#post_publication button:hover {
+    background: #FFD7D7;
+}
 </style>

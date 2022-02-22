@@ -66,7 +66,7 @@ exports.getAllUserPublications = (req, res, next) => {
 exports.deletePublication = (req, res, next) => {
     Publication.findOne({ where: { id: req.params.id } })
     .then(publication => {
-        if (publication.dataValues.userId === req.token.userId) {
+        if (publication.dataValues.UserId === req.token.userId) {
             publication.destroy();
             return res.status(200).json({ message: 'Publication supprimée !' });
         } else {

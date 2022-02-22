@@ -2,10 +2,15 @@
     <div id="show_publications">
         <div class="publication" v-for="publication in publicationList" :key="publication.id">
             <div class="publication-header">
-                <ImageProfil :imageUrl="publication.User.imageUrl" />
-                <div class="publication-header-infos">
-                    <div class="publication-header_name" @click="setProfilId(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
-                    <div class="publication-header_date">{{ publication.createdAt | formatDate }}</div>
+                <div class="publication-header_user">
+                    <ImageProfil :imageUrl="publication.User.imageUrl" />
+                    <div class="publication-header_user-infos">
+                        <div class="publication-header_user-name" @click="setProfilId(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
+                        <div class="publication-header_user-date">{{ publication.createdAt | formatDate }}</div>
+                    </div>
+                </div>
+                <div class="publication-header_option">
+                    <OptionButtons :publicationId="publication.id" />
                 </div>
             </div>
             <div class="publication-body">
@@ -20,11 +25,13 @@
 import { mapState, mapActions } from 'vuex'
 import Commentaries from '../components/Commentaries.vue'
 import ImageProfil from '../components/ImageProfil.vue'
+import OptionButtons from '../components/OptionButtons.vue'
 
 export default {
     components: {
         Commentaries,
-        ImageProfil
+        ImageProfil,
+        OptionButtons
     },
     props: {
         profilId: {}
@@ -65,29 +72,33 @@ export default {
     box-shadow: 2px 2px 10px;
     display: flex;
     flex-flow: column;
-    align-items: flex-start;
 }
 
 .publication-header {
-    width: 100%;
     padding: 10px;
     text-align: start;
     display: flex;
     align-items: center;
     flex-direction: row;
+    justify-content: space-between;
 }
 
-.publication-header_name {
+.publication-header_user {
+    display: flex;
+    align-items: center;
+}
+
+.publication-header_user-name {
     font-weight: bold;
     font-size: 1.1rem;
     width: fit-content;
 }
 
-.publication-header_name:hover {
+.publication-header_user-name:hover {
     color: #BA4D55;
 }
 
-.publication-header_date {
+.publication-header_user-date {
     font-size: 0.8rem;
 }
 

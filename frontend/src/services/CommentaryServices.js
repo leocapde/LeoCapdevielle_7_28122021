@@ -19,5 +19,12 @@ export default {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         })
+    },
+    deleteCommentary(CommentaryId) {
+        return axios.delete(`${baseUrl}/${CommentaryId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
     }
 }

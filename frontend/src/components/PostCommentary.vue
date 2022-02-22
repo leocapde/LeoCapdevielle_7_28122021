@@ -64,4 +64,7 @@ export default {
     border-radius: 0 20px 20px 0;
 }
 
+#post_commentary button:hover {
+    background: #FFD7D7;
+}
 </style>
