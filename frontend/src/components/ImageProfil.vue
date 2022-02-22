@@ -18,7 +18,8 @@ export default {
 #image-profil > img {
     width: 60px;
     height: 60px;
-    border: 2px solid black;
+    object-fit: cover;
+    padding: 1px;
     border-radius: 50px;
     margin-right: 10px;
     background: gray; /* Gray pour dvp sinon white */ 

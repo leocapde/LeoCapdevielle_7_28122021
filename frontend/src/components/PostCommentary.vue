@@ -46,7 +46,6 @@ export default {
 
 <style>
 #post_commentary {
-    /* border: 1px solid green; */
     padding: 10px;
     display: flex;
     border-radius: 20px;

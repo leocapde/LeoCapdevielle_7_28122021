@@ -54,7 +54,7 @@ export default new Vuex.Store({
     async setUserProfil(context, profilId) {
       const profil = await UserServices.getOneUser(profilId)
       context.commit('SET_USER_PROFIL', profil.data)
-  },
+    },
     setProfilModification(context, payload) {
       context.commit('SET_PROFIL_MODIFICATION', payload)
     }

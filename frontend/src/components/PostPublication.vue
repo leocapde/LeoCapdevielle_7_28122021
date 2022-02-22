@@ -25,7 +25,6 @@ export default {
 
 <style>
 #post_publication {
-    border: 1px solid black;
     padding: 10px;
     display: flex;
     border-radius: 20px;

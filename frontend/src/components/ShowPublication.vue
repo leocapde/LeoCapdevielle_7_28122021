@@ -65,7 +65,6 @@ export default {
 
 <style>
 .publication {
-    border: 1px solid black;
     border-radius: 20px;
     margin: 10px 0;
     background: white;

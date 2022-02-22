@@ -57,7 +57,6 @@ export default {
 
 <style>
 #profil {
-    border: 1px solid black;
     border-radius: 20px;
     margin: 10px 0;
     background: #FFD7D7;
@@ -74,15 +73,6 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-#profil-img {
-    width: 60px;
-    height: 60px;
-    border: 2px solid black;
-    border-radius: 100px;
-    background: white;
-    margin-right: 10px;
 }
 
 #profil-name {

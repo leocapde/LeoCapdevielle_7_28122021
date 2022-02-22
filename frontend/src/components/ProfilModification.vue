@@ -1,33 +1,37 @@
 <template>
     <div id="profil-modification">
-        <h1 id="profil-modification-header">Modification du profil</h1>
-        <form id="profil-modification-form" @submit.prevent>
-            
-            <label for="firstName">Prénom :</label>
-            <input type="text" name="firstName" v-model="userProfil.firstName">
-            
-            <label for="lastName">Nom :</label>
-            <input type="text" name="lastName" v-model="userProfil.lastName">
-            
-            <label for="lastName">Photo de profil :</label>
-            <input type="file" name="lastName" @change="changeFile"> <!-- v-model="userProfil.imageUrl"> -->
-            <ImageProfil :imageUrl="userProfil.imageUrl" />
+        <div id="profil-modification-body">
+            <h1 id="profil-modification-header">Modification du profil</h1>
+            <form id="profil-modification-form" @submit.prevent>
+                
+                <label for="firstName">Prénom :</label>
+                <input type="text" name="firstName" v-model="userProfil.firstName">
+                
+                <label for="lastName">Nom :</label>
+                <input type="text" name="lastName" v-model="userProfil.lastName">
+                
+                <label for="imageUrl">Photo de profil :</label>
+                <input type="file" name="imageUrl" id="imageUrl" @change="changeImage"> <!-- v-model="userProfil.imageUrl"> -->
+                <ImageProfil :imageUrl="userProfil.imageUrl" />
 
-            <label for="age">Age :</label>
-            <input type="age" name="age" v-model="userProfil.age">
+                <label for="age">Age :</label>
+                <input type="age" name="age" v-model="userProfil.age">
 
-            <label for="job">Poste :</label>
-            <input type="job" name="job" v-model="userProfil.job">
+                <label for="job">Poste :</label>
+                <input type="job" name="job" v-model="userProfil.job">
 
-            <label for="email">Email :</label>
-            <input type="email" name="email" v-model="userProfil.email">
+                <label for="email">Email :</label>
+                <input type="email" name="email" v-model="userProfil.email">
 
-            <label for="description">Biographie :</label>
-            <textarea type="text" name="description" rows="5" cols="100" v-model="userProfil.description"></textarea>
+                <label for="description">Biographie :</label>
+                <textarea type="text" name="description" rows="5" cols="100" v-model="userProfil.description"></textarea>
 
-            <button id="profil-update-button" @click="updateUser()">Valider les modifications</button>
-            <br>
-        </form>
+                <div id="profil-update-button">
+                    <button id="profil-update-button-validate" @click="updateUser()">Valider les modifications</button>
+                    <button id="profil-update-button-cancel" @click="cancelModification()">Annuler les modifications</button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -59,8 +63,11 @@ export default {
             setUserProfil: 'setUserProfil',
             setProfilModification: 'setProfilModification'
         }),
-        changeFile(event) {
-            this.userProfil.imageUrl = event.target.files
+        changeImage() {
+            let image = document.getElementById('imageUrl').files[0]
+            if (image) {
+                this.userProfil.imageUrl = URL.createObjectURL(image)
+            }
         },
         updateUser() {
             UserServices.modifyUser(
@@ -75,7 +82,9 @@ export default {
                 this.userProfil.description
             )
             this.setProfilModification(false)
-            console.log(this.userProfil.id)
+        },
+        cancelModification() {
+            this.setProfilModification(false)
         }
     }
 }
@@ -83,6 +92,21 @@ export default {
 
 <style>
 #profil-modification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.50);
+    z-index: 9999;
+}
+
+#profil-modification-body {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 650px;
     border: 1px solid black;
     border-radius: 20px;
     margin: 10px 0;

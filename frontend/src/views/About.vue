@@ -4,10 +4,10 @@
 
         <div id="about_body">
             <PostPublication v-if="!profilId" />
-            <Profil v-else-if="!profilModification" :profilId="profilId"/>
-            <ProfilModification v-else :profilId="profilId" />
+            <Profil v-else :profilId="profilId"/>
+            <ProfilModification v-if="profilModification" :profilId="profilId" />
 
-            <ShowPublication v-if="!profilModification" :profilId="profilId" />
+            <ShowPublication :profilId="profilId" />
         </div>
     </div>
 </template>
