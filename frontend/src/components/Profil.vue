@@ -16,7 +16,7 @@
         <div id="profil-description" v-if="userProfil.description">
             <span class="profil-span">Biographie: </span>{{ userProfil.description }}
         </div>
-        <button id="profil-update-button" @click="setProfilModification(true)">Modifier le profil</button>
+        <button id="profil-update-button" v-if="userProfil.id == currentUser" @click="setProfilModification(true)">Modifier le profil</button>
     </div>
 </template>
 
@@ -26,6 +26,11 @@ import ImageProfil from '../components/ImageProfil.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
+    data() {
+        return {
+            currentUser: localStorage.getItem('userId'),
+        }
+    },
     components: {
         ImageProfil
     },

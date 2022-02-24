@@ -5,26 +5,26 @@
             <form id="profil-modification-form" @submit.prevent>
                 
                 <label for="firstName">Prénom :</label>
-                <input type="text" name="firstName" v-model="userProfil.firstName">
+                <input type="text" name="firstName" v-model="user.firstName">
                 
                 <label for="lastName">Nom :</label>
-                <input type="text" name="lastName" v-model="userProfil.lastName">
+                <input type="text" name="lastName" v-model="user.lastName">
                 
                 <label for="imageUrl">Photo de profil :</label>
-                <input type="file" name="imageUrl" id="imageUrl" @change="changeImage"> <!-- v-model="userProfil.imageUrl"> -->
-                <ImageProfil :imageUrl="userProfil.imageUrl" />
+                <input type="file" name="imageUrl" id="imageUrl" @change="changeImage"> <!-- v-model="user.imageUrl"> -->
+                <ImageProfil :imageUrl="user.imageUrl" />
 
                 <label for="age">Age :</label>
-                <input type="age" name="age" v-model="userProfil.age">
+                <input type="age" name="age" v-model="user.age">
 
                 <label for="job">Poste :</label>
-                <input type="job" name="job" v-model="userProfil.job">
+                <input type="job" name="job" v-model="user.job">
 
                 <label for="email">Email :</label>
-                <input type="email" name="email" v-model="userProfil.email">
+                <input type="email" name="email" v-model="user.email">
 
                 <label for="description">Biographie :</label>
-                <textarea type="text" name="description" rows="5" cols="100" v-model="userProfil.description"></textarea>
+                <textarea type="text" name="description" rows="5" cols="100" v-model="user.description"></textarea>
 
                 <div id="profil-update-button">
                     <button id="profil-update-button-validate" @click="updateUser()">Valider les modifications</button>
@@ -42,6 +42,11 @@ import UserServices from '../services/UserServices'
 import { mapState, mapActions } from 'vuex'
 
 export default {
+    data() {
+        return {
+            user: {}
+        }
+    },
     components: {
         ImageProfil
     },
@@ -51,6 +56,7 @@ export default {
     },
     mounted() {
         this.setUserProfil(this.profilId)
+        this.user = this.userProfil
     },
     computed: {
         ...mapState({
@@ -71,15 +77,15 @@ export default {
         },
         updateUser() {
             UserServices.modifyUser(
-                this.userProfil.id,
-                this.userProfil.email,
-                this.userProfil.password,
-                this.userProfil.lastName,
-                this.userProfil.firstName,
-                this.userProfil.imageUrl,
-                this.userProfil.age,
-                this.userProfil.job,
-                this.userProfil.description
+                this.user.id,
+                this.user.email,
+                this.user.password,
+                this.user.lastName,
+                this.user.firstName,
+                this.user.imageUrl,
+                this.user.age,
+                this.user.job,
+                this.user.description
             )
             this.setProfilModification(false)
         },

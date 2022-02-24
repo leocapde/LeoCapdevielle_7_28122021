@@ -3,13 +3,21 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import moment from 'moment'
+// Composant pour renommer la page
 
+import TitlePage from './components/TitlePage.vue'
+Vue.component('title-page', TitlePage)
+
+// Filtre pour formatter la date
+
+import moment from 'moment'
 Vue.filter('formatDate', (date) => {
   if (date) {
     return moment(date).locale('fr').calendar()
   }
 })
+
+// Composant pour pouvoir utiliser les icons FontAwesomme
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'

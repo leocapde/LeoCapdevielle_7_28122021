@@ -1,5 +1,5 @@
 <template>
-    <div id="option">
+    <div id="option" @mouseleave="leaveOption()">
         <div id="option-button" @click="getOption()">
             <font-awesome-icon icon="fa-solid fa-ellipsis" />
         </div>
@@ -32,6 +32,9 @@ export default {
             } else {
                 return this.option = false
             }
+        },
+        leaveOption() {
+            return this.option = false
         },
         deleteThis() {
             if (this.commentaryId) {

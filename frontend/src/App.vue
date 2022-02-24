@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <title-page title="Groupomania"></title-page>
     <router-view/>
   </div>
 </template>

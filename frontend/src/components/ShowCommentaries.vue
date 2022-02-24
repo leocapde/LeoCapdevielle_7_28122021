@@ -13,14 +13,6 @@
                     <OptionButtons :commentaryId="commentary.id" />
                 </div>
             </div>
-            <!-- <div class="commentary-header">
-                <ImageProfil :imageUrl="commentary.User.imageUrl" />
-                <div class="commentary-header_infos">
-                    <div class="commentary-header_name" @click="setProfilId(commentary.UserId)">{{ commentary.User.firstName }} {{ commentary.User.lastName }}</div>
-                    <div class="commentary-header_date">{{ commentary.createdAt | formatDate }}</div>
-                    <OptionButtons :commentaryId="commentary.id" />
-                </div>
-            </div> -->
             <div class="commentary-body">{{ commentary.description }}</div>
         </div>
     </div>
