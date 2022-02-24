@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="publication-header_option">
-                    <OptionButtons :publicationId="publication.id" />
+                    <OptionButtons :userId="publication.UserId" :publicationId="publication.id" />
                 </div>
             </div>
             <div class="publication-body">
@@ -46,7 +46,11 @@ export default {
         }
     },
     mounted() {
-        this.setPublicationList()
+        if (this.profilId) {
+            this.setUserPublicationList(this.profilId)
+        } else {
+            this.setPublicationList()
+        }
     },
     computed: {
         ...mapState({

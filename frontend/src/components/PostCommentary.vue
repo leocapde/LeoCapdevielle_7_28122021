@@ -8,7 +8,7 @@
 <script>
 import CommentaryServices from '../services/CommentaryServices'
 
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     data() {
@@ -22,23 +22,13 @@ export default {
             required: true
         }
     },
-    computed: {
-        ...mapState({
-            // userProfil: 'userProfil',
-            // publicationList: 'publicationList'
-        })
-    },
     methods: {
         ...mapActions({
-            // setUserProfil: 'setUserProfil',
-            // setUserPublicationList: 'setUserPublicationList'
+            incrementChangeKey: 'incrementChangeKey'
         }),
         postNewCommentary() {
             CommentaryServices.postCommentary(this.description, this.publicationId)
-            location.reload()
-            // this.setUserProfil(this.userProfil)
-            // this.setUserPublicationList(this.userProfil)
-            // console.log(this.publicationList)
+            this.incrementChangeKey()
         }
     }
 }

@@ -67,7 +67,8 @@ export default {
     methods: {
         ...mapActions({
             setUserProfil: 'setUserProfil',
-            setProfilModification: 'setProfilModification'
+            setProfilModification: 'setProfilModification',
+            incrementChangeKey: 'incrementChangeKey'
         }),
         changeImage() {
             let image = document.getElementById('imageUrl').files[0]
@@ -87,6 +88,7 @@ export default {
                 this.user.job,
                 this.user.description
             )
+            this.incrementChangeKey()
             this.setProfilModification(false)
         },
         cancelModification() {

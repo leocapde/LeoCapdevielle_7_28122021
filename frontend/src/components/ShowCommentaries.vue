@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="commentary-header_option">
-                    <OptionButtons :commentaryId="commentary.id" />
+                    <OptionButtons :userId="commentary.UserId" :commentaryId="commentary.id" />
                 </div>
             </div>
             <div class="commentary-body">{{ commentary.description }}</div>

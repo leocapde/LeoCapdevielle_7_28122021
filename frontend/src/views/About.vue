@@ -4,10 +4,10 @@
 
         <div id="about_body">
             <PostPublication v-if="!profilId" />
-            <Profil v-else :profilId="profilId"/>
+            <Profil v-else :profilId="profilId" :key="changeKey" />
             <ProfilModification v-if="profilModification" :profilId="profilId" />
 
-            <ShowPublication :profilId="profilId" />
+            <ShowPublication :profilId="profilId" :key="changeKey +1" />
         </div>
     </div>
 </template>
@@ -33,8 +33,12 @@ export default {
     computed: {
         ...mapState({
             profilId: 'profilId',
-            profilModification: 'profilModification'
+            profilModification: 'profilModification',
+            changeKey: 'changeKey'
         })
+    },
+    watch: {
+        changeKey() {}
     }
 }
 </script>

@@ -14,6 +14,7 @@ export default new Vuex.Store({
     publicationList: [],
     userProfil: {},
     profilModification: false,
+    changeKey: 0,
   },
   mutations: {
     SET_HOME_MODE(state, payload){
@@ -24,14 +25,15 @@ export default new Vuex.Store({
     },
     SET_PUBLICATION_LIST(state, payload){
       state.publicationList = payload
-      // console.log(state.publicationList)
     },
     SET_USER_PROFIL(state, payload) {
       state.userProfil = payload
-      // console.log(state.userProfil)
     },
     SET_PROFIL_MODIFICATION(state, payload){
       state.profilModification = payload;
+    },
+    INCREMENT_CHANGE_KEY(state){
+      state.changeKey++
     }
   },
   actions: {
@@ -57,6 +59,9 @@ export default new Vuex.Store({
     },
     setProfilModification(context, payload) {
       context.commit('SET_PROFIL_MODIFICATION', payload)
+    },
+    incrementChangeKey(context) {
+      context.commit('INCREMENT_CHANGE_KEY')
     }
   }
 })

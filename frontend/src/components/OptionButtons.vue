@@ -4,9 +4,9 @@
             <font-awesome-icon icon="fa-solid fa-ellipsis" />
         </div>
         <div id="option-select" v-if="option">
-            <div @click="deleteThis()">Supprimer</div>
-            <div>Modifier</div>
-            <div @click="signalThis()">Signaler</div>
+            <div @click="deleteThis()" v-if="userId == currentUser">Supprimer</div>
+            <div v-if="userId == currentUser">Modifier</div>
+            <div @click="signalThis()" v-else>Signaler</div>
         </div>
     </div>
 </template>
@@ -14,18 +14,24 @@
 <script>
 import PublicationServices from '../services/PublicationServices'
 import CommentaryServices from '../services/CommentaryServices'
+import { mapActions } from 'vuex'
 
 export default {
     data() {
         return {
-            option: false
+            option: false,
+            currentUser: localStorage.getItem('userId'),
         }
     },
     props: {
+        userId: { required: true }, 
         publicationId: { type: Number },
         commentaryId: { type: Number }
     },
     methods: {
+        ...mapActions({
+            incrementChangeKey: 'incrementChangeKey'
+        }),
         getOption() {
             if (!this.option) {
                 return this.option = true
@@ -40,12 +46,12 @@ export default {
             if (this.commentaryId) {
                 if (confirm('Voulez vous vraiment supprimer ce commentaire ?')) {
                     CommentaryServices.deleteCommentary(this.commentaryId)
-                    location.reload()
+                    this.incrementChangeKey()
                 }
             } else if (this.publicationId) {
                 if (confirm('Voulez vous vraiment supprimer cette publication ?')) {
                     PublicationServices.deletePublication(this.publicationId)
-                    location.reload()
+                    this.incrementChangeKey()
                 }
             }
         },

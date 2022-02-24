@@ -7,6 +7,7 @@
 
 <script>
 import PublicationServices from '../services/PublicationServices'
+import { mapActions } from 'vuex'
 
 export default {
     data() {
@@ -15,9 +16,12 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            incrementChangeKey: 'incrementChangeKey'
+        }),
         async postNewPublication() {
             await PublicationServices.postPublication(this.description)
-            location.reload()
+            this.incrementChangeKey()
         }
     }
 }
