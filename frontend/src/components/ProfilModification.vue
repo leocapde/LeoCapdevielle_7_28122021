@@ -2,7 +2,7 @@
     <div id="profil-modification">
         <div id="profil-modification-body">
             <h1 id="profil-modification-header">Modification du profil</h1>
-            <form id="profil-modification-form" @submit.prevent>
+            <form id="profil-modification-form" @submit.prevent> 
                 
                 <label for="firstName">Prénom :</label>
                 <input type="text" name="firstName" v-model="user.firstName">
@@ -11,8 +11,9 @@
                 <input type="text" name="lastName" v-model="user.lastName">
                 
                 <label for="imageUrl">Photo de profil :</label>
-                <input type="file" name="imageUrl" id="imageUrl" @change="changeImage"> <!-- v-model="user.imageUrl"> -->
-                <ImageProfil :imageUrl="user.imageUrl" />
+                <input type="file" name="imageUrl" id="imageUrl" @change="changeImage">
+                <img :src="user.imageUrl" v-if="user.imageUrl">
+                <img src="../assets/icon.png" v-else >
 
                 <label for="age">Age :</label>
                 <input type="age" name="age" v-model="user.age">
@@ -27,8 +28,9 @@
                 <textarea type="text" name="description" rows="5" cols="100" v-model="user.description"></textarea>
 
                 <div id="profil-update-button">
-                    <button id="profil-update-button-validate" @click="updateUser()">Valider les modifications</button>
-                    <button id="profil-update-button-cancel" @click="cancelModification()">Annuler les modifications</button>
+                    <button id="profil-update-button-validate" type="button" @click="updateUser()">Valider les modifications</button>
+                    <button id="profil-update-button-cancel" type="button" @click="cancelModification()">Annuler les modifications</button>
+                    <button id="profil-update-button-delete" type="button" @click="deleteUser()">Supprimer le profil</button>
                 </div>
             </form>
         </div>
@@ -36,7 +38,6 @@
 </template>
 
 <script>
-import ImageProfil from '../components/ImageProfil.vue'
 import UserServices from '../services/UserServices'
 
 import { mapState, mapActions } from 'vuex'
@@ -44,11 +45,12 @@ import { mapState, mapActions } from 'vuex'
 export default {
     data() {
         return {
-            user: {}
+            user: {},
+            imageFile: null
         }
     },
     components: {
-        ImageProfil
+        // ImageProfil
     },
     props: {
         profilId: { required: true }
@@ -70,29 +72,28 @@ export default {
             setProfilModification: 'setProfilModification',
             incrementChangeKey: 'incrementChangeKey'
         }),
-        changeImage() {
-            let image = document.getElementById('imageUrl').files[0]
-            if (image) {
-                this.userProfil.imageUrl = URL.createObjectURL(image)
-            }
+        changeImage(event) {
+            let image = event.target.files[0]
+            this.user.imageUrl = URL.createObjectURL(image)
+            this.imageFile = image
         },
         updateUser() {
             UserServices.modifyUser(
                 this.user.id,
-                this.user.email,
-                this.user.password,
-                this.user.lastName,
-                this.user.firstName,
-                this.user.imageUrl,
-                this.user.age,
-                this.user.job,
-                this.user.description
+                this.user,
+                this.imageFile,
             )
             this.incrementChangeKey()
             this.setProfilModification(false)
         },
         cancelModification() {
             this.setProfilModification(false)
+        },
+        deleteUser() {
+            if (confirm('Etes-vous sur de vouloir supprimer votre profil ?')) {
+                UserServices.deleteUser(this.user.id)
+                UserServices.signout()
+            }
         }
     }
 }
@@ -118,7 +119,7 @@ export default {
     border: 1px solid black;
     border-radius: 20px;
     margin: 10px 0;
-    background: #FFD7D7;
+    background: white;
     box-shadow: 2px 2px 10px;
     text-align: start;
     padding: 10px;
@@ -134,6 +135,15 @@ export default {
     max-width: 500px;
     align-content: center;
     margin: auto;
+}
+
+#profil-modification-form img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    padding: 1px;
+    border-radius: 50px;
+    margin-right: 10px;
 }
 
 #profil-header {

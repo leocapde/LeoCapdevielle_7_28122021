@@ -63,13 +63,20 @@ exports.modifyUser = (req, res, next) => {
     User.findOne({ where: { id: req.params.id }})
     .then(user => {
         if (user.dataValues.id === req.token.userId) {
-            const userObject = req.file ? 
-            {
-                ...JSON.parse(req.body.user),
-                imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-            } : {...req.body};
-            user.update({ ...userObject })
-            return res.status(200).json({ message: 'Utilisateur modifié'})
+            if (user.imageUrl) {
+                const filename = user.imageUrl.split("/images/")[1];
+                fs.unlink(`images/${filename}`, () => {
+                    user.update({
+                        ...JSON.parse(req.body.user),
+                        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+                    })
+                    return res.status(200).json({ message: 'Utilisateur modifié !' });
+                })
+            } 
+            else {
+                user.update({...JSON.parse(req.body.user)})
+                return res.status(200).json({ message: 'Utilisateur modifié !' });
+            }
         } else {
             return res.status(403).json({ error: 'Requête non authorisée !'})
         }
@@ -81,9 +88,8 @@ exports.deleteUser = (req, res, next) => {
     User.findOne({ where: { id: req.params.id }})
     .then(user => {
         if (user.dataValues.id === req.token.userId) {
-            console.log(req.file);
-            if (req.file) {
-                const filename = sauce.imageUrl.split("/images/")[1];
+            if (user.imageUrl) {
+                const filename = user.imageUrl.split("/images/")[1];
                 fs.unlink(`images/${filename}`, () => {
                     user.destroy();
                     return res.status(200).json({ message: 'Utilisateur supprimé !' });

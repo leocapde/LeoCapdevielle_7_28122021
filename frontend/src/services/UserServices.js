@@ -1,4 +1,5 @@
 import axios from 'axios';
+import FormData from 'form-data';
 
 const baseUrl = 'http://localhost:3000/auth';
 
@@ -26,7 +27,8 @@ export default {
         .catch(error => console.log(error))
     },
     signout() {
-        localStorage.removeItem('token');
+        localStorage.removeItem('token')
+        localStorage.removeItem('userId')
         window.location = '../'
     },
     getOneUser(userIdProfil) {
@@ -36,17 +38,19 @@ export default {
             }
         })
     },
-    modifyUser(userId, email, password, lastName, firstName, imageUrl, age, job, description) {
-        return axios.put(`${baseUrl}/${userId}`, {
-            email: email,
-            password: password,
-            lastName: lastName,
-            firstName: firstName,
-            imageUrl: imageUrl,
-            age: age,
-            job: job,
-            description: description
-        }, {
+    modifyUser(userId, user, image) {
+        const formData = new FormData()
+        formData.append('user', JSON.stringify(user))
+        formData.append('image', image)
+        return axios.put(`${baseUrl}/${userId}`, formData, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data; boundary=MyBoundary'
+            }
+        })
+    },
+    deleteUser(userId) {
+        return axios.delete(`${baseUrl}/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }

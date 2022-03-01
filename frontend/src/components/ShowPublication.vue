@@ -3,7 +3,8 @@
         <div class="publication" v-for="publication in publicationList" :key="publication.id">
             <div class="publication-header">
                 <div class="publication-header_user">
-                    <ImageProfil :imageUrl="publication.User.imageUrl" />
+                    <img alt="photo de profil" :src="publication.User.imageUrl" v-if="publication.User.imageUrl">
+                    <img alt="photo de profil" src="../assets/icon.png" v-else >
                     <div class="publication-header_user-infos">
                         <div class="publication-header_user-name" @click="setProfilId(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
                         <div class="publication-header_user-date">{{ publication.createdAt | formatDate }}</div>
@@ -24,13 +25,11 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import Commentaries from '../components/Commentaries.vue'
-import ImageProfil from '../components/ImageProfil.vue'
 import OptionButtons from '../components/OptionButtons.vue'
 
 export default {
     components: {
         Commentaries,
-        ImageProfil,
         OptionButtons
     },
     props: {
@@ -89,6 +88,15 @@ export default {
 .publication-header_user {
     display: flex;
     align-items: center;
+}
+
+.publication-header_user > img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    padding: 1px;
+    border-radius: 60px;
+    margin-right: 10px;
 }
 
 .publication-header_user-name {

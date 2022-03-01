@@ -1,12 +1,12 @@
 <template>
   <div id="login">
     <!-- <h1>Connection</h1> -->
-    <form id="login-form" @submit.prevent>
+    <form id="login-form" @submit.prevent="getLogin()">
       <label for="email">Email :</label>
       <input type="email" name="email" v-model="email">
       <label for="password">Mot de passe :</label>
       <input type="password" name="password" v-model="password">
-      <button id="login-button" @click="getLogin()">Se connecter</button>
+      <button type="submit" id="login-button">Se connecter</button>
       <br>
     </form>
   </div>

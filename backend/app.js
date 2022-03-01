@@ -1,5 +1,6 @@
 const express = require('express');
 const sequelize = require('./config/database');
+const path = require('path')
 
 const userRoutes = require('./routes/user');
 const publiationRoutes = require('./routes/publication');
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/auth', userRoutes);
 app.use('/publications', publiationRoutes);

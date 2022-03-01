@@ -3,7 +3,8 @@
         <div class="commentary" v-for="commentary in commentaries" :key="commentary.id">
             <div class="commentary-header">
                 <div class="commentary-header_user">
-                    <ImageProfil :imageUrl="commentary.User.imageUrl" />
+                    <img alt="photo de profil" :src="commentary.User.imageUrl" v-if="commentary.User.imageUrl">
+                    <img alt="photo de profil" src="../assets/icon.png" v-else >
                     <div class="commentary-header_user-infos">
                         <div class="commentary-header_user-name" @click="setProfilId(commentary.UserId)">{{ commentary.User.firstName }} {{ commentary.User.lastName }}</div>
                         <div class="commentary-header_user-date">{{ commentary.createdAt | formatDate }}</div>
@@ -20,12 +21,10 @@
 
 <script>
 import { mapActions } from 'vuex'
-import ImageProfil from '../components/ImageProfil.vue'
 import OptionButtons from '../components/OptionButtons.vue'
 
 export default {
     components: {
-        ImageProfil,
         OptionButtons
     },
     props: {
@@ -63,6 +62,15 @@ export default {
 .commentary-header_user {
     display: flex;
     align-items: center;
+}
+
+.commentary-header_user > img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    padding: 1px;
+    border-radius: 45px;
+    margin-right: 10px;
 }
 
 .commentary-header_user-name {

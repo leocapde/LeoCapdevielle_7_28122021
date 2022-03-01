@@ -1,6 +1,6 @@
 <template>
     <div id="about_header">
-            <img id="logo-about_header" alt="Groupomania logo" src="../assets/images/icon-left-font-monochrome-white.png">
+            <img id="logo-about_header" alt="Groupomania logo" src="../assets/icon-left-font-monochrome-white.png">
             <nav id="about-nav">
                 <button @click="setProfilId('')">Fil d'actualité</button>
                 <button @click="setProfilId(currentUser)">Mon profil</button>

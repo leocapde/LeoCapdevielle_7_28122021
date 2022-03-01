@@ -1,7 +1,7 @@
 <template>
   <div id="signup">
     <!-- <h1>Inscription</h1> -->
-    <form id="signup-form" @submit.prevent>
+    <form id="signup-form" @submit.prevent="getSignup()">
       <label for="email">Email :</label>
       <input type="email" name="email" v-model="email">
       <label for="password">Mot de passe :</label>
@@ -10,7 +10,7 @@
       <input type="text" name="lastName" v-model="lastName">
       <label for="firstName">Prénom :</label>
       <input type="text" name="firstName" v-model="firstName">
-      <button id="login-button" @click="getSignup()">S'inscrire</button>
+      <button id="login-button" type="submit">S'inscrire</button>
       <br>
     </form>
   </div>

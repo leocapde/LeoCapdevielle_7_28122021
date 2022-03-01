@@ -1,7 +1,7 @@
 <template>
-    <form id="post_commentary" @submit.prevent>
+    <form id="post_commentary" @submit.prevent="postNewCommentary()">
         <textarea type="text" placeholder="Votre commentaire !" cols="100" v-model="description"></textarea>
-        <button @click="postNewCommentary()">Poster</button>
+        <button type="submit">Poster</button>
     </form>
 </template>
 

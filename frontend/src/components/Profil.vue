@@ -1,7 +1,8 @@
 <template>
     <div id="profil">
         <div id="profil-header">
-            <ImageProfil :imageUrl="userProfil.imageUrl" />
+            <img alt="photo de profil" :src="userProfil.imageUrl" v-if="userProfil.imageUrl">
+            <img alt="photo de profil" src="../assets/icon.png" v-else >
             <div id="profil-name">{{ userProfil.firstName }} {{ userProfil.lastName}}</div>
         </div>
         <div id="profil-age" v-if="userProfil.age">
@@ -21,8 +22,6 @@
 </template>
 
 <script>
-import ImageProfil from '../components/ImageProfil.vue'
-
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -30,9 +29,6 @@ export default {
         return {
             currentUser: localStorage.getItem('userId'),
         }
-    },
-    components: {
-        ImageProfil
     },
     props: {
         profilId: { required: true }
@@ -64,7 +60,7 @@ export default {
 #profil {
     border-radius: 20px;
     margin: 10px 0;
-    background: #FFD7D7;
+    background: white;
     box-shadow: 2px 2px 10px;
     text-align: start;
     padding: 10px;
@@ -78,6 +74,15 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+#profil-header > img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    padding: 1px;
+    border-radius: 150px;
+    margin-right: 10px;
 }
 
 #profil-name {
