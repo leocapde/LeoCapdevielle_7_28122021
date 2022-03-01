@@ -4,12 +4,23 @@ const Commentary = require('../models/Commentary')
 const fs = require('fs');
 
 exports.createPublication = (req, res, next) => {
-    Publication.create({
-        UserId: req.token.userId,
-        description: req.body.description
-    })
-    .then(() => res.status(201).json({ message: 'Nouvel publication créée !' }))
-    .catch(error => res.status(400).json({ error }))
+    if (req.file) {
+        Publication.create({
+            UserId: req.token.userId,
+            description: JSON.parse(req.body.description),
+            fileUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        })
+        .then(() => res.status(201).json({ message: 'Nouvel publication créée !' }))
+        .catch(error => res.status(400).json({ error }))
+    } 
+    else {
+        Publication.create({
+            UserId: req.token.userId,
+            description: req.body.description
+        })
+        .then(() => res.status(201).json({ message: 'Nouvel publication créée !' }))
+        .catch(error => res.status(400).json({ error }))
+    }
 };
 
 exports.getAllPublications = (req, res, next) => {
@@ -67,8 +78,17 @@ exports.deletePublication = (req, res, next) => {
     Publication.findOne({ where: { id: req.params.id } })
     .then(publication => {
         if (publication.dataValues.UserId === req.token.userId) {
-            publication.destroy();
-            return res.status(200).json({ message: 'Publication supprimée !' });
+            if (publication.fileUrl) {
+                const filename = publication.fileUrl.split("/images/")[1]
+                fs.unlink(`images/${filename}`, () => {
+                    publication.destroy();
+                    return res.status(200).json({ message: 'Publication supprimée !' });        
+                })
+            } 
+            else {
+                publication.destroy();
+                return res.status(200).json({ message: 'Publication supprimée !' });
+            }
         } else {
             return res.status(403).json({ error: 'Requête non authorisée !'})
         }

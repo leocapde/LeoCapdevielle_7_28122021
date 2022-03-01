@@ -3,7 +3,7 @@
         <AboutHeader />
 
         <div id="about_body">
-            <PostPublication v-if="!profilId" />
+            <PostPublication v-if="!profilId" :key="changeKey +2" />
             <Profil v-else :profilId="profilId" :key="changeKey" />
             <ProfilModification v-if="profilModification" :profilId="profilId" />
 

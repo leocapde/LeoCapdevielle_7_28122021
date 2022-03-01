@@ -16,6 +16,7 @@
             </div>
             <div class="publication-body">
                 <div class="publication-body_description">{{ publication.description }}</div>
+                <img id="show_image" :src="publication.fileUrl" v-if="publication.fileUrl" >
                 <Commentaries :commentaries="publication.Commentaries" :publicationId="publication.id"/>
             </div>
         </div>
@@ -112,6 +113,14 @@ export default {
 .publication-header_user-date {
     font-size: 0.8rem;
 }
+
+#show_image {
+    padding: 10px;
+    max-height: 500px;
+    max-width: 500px;
+    object-fit: contain;
+}
+
 
 .publication-body {
     border-radius: 20px;

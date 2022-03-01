@@ -75,7 +75,7 @@ export default {
 
 .commentary-header_user-name {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     width: fit-content;
 }
 

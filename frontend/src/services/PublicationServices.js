@@ -1,4 +1,5 @@
 import axios from 'axios';
+import FormData from 'form-data';
 
 const baseUrl = 'http://localhost:3000/publications';
 
@@ -17,12 +18,14 @@ export default {
             }
         })
     },
-    postPublication(description) {
-        return axios.post(`${baseUrl}/`, { 
-            description: description 
-        }, {
+    postPublication(description, image) {
+        const formData  = new FormData()
+        formData.append('description', JSON.stringify(description))
+        formData.append('image', image)
+        return axios.post(`${baseUrl}/`, formData, {
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data; boundary=MyBoundary'
             },
         } )
     },

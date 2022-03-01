@@ -11,7 +11,7 @@
                 <input type="text" name="lastName" v-model="user.lastName">
                 
                 <label for="imageUrl">Photo de profil :</label>
-                <input type="file" name="imageUrl" id="imageUrl" @change="changeImage">
+                <input type="file" name="imageUrl" id="imageUrl" @change="changeImage" accept="image/*">
                 <img :src="user.imageUrl" v-if="user.imageUrl">
                 <img src="../assets/icon.png" v-else >
 
