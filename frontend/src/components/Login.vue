@@ -1,13 +1,16 @@
 <template>
-  <div id="login">
-    <!-- <h1>Connection</h1> -->
-    <form id="login-form" @submit.prevent="getLogin()">
-      <label for="email">Email :</label>
-      <input type="email" name="email" v-model="email">
-      <label for="password">Mot de passe :</label>
-      <input type="password" name="password" v-model="password">
-      <button type="submit" id="login-button">Se connecter</button>
-      <br>
+  <div id="login" class="home-component">
+    <form id="login-form" class="home-form" @submit.prevent="getLogin()">
+      <div class="form-item">
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" v-model="email" required>
+      </div>
+      <div class="form-item">
+        <label for="password">Mot de passe :</label>
+        <input type="password" name="password" id="password" v-model="password" required minlength="4">
+      </div>
+      <span class="error">{{ this.error }}</span>
+      <input type="submit" class="form-submit" value="Se connecter" />
     </form>
   </div>
 </template>
@@ -18,37 +21,22 @@ import UserServices from '../services/UserServices'
 export default {
   data() {
     return {
-      email: '',
-      password: ''
+      email: null,
+      password: null,
+      error: null,
     }
   },
   methods: {
     getLogin () {
       UserServices.login(this.email, this.password)
+      .catch(() => { 
+        return this.error = 'Email ou mot de passe incorrect'
+      })
     }
   }
 }
 </script>
 
 <style>
-#login {
-  border: 2px solid black;
-  border-radius: 0 0 20px 20px;
-  background: #EFEFEF;
-  max-width: 550px;
-  margin: auto;
-  padding: 30px 10px 0;
-}
 
-#login-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  align-content: center;
-  margin: auto;
-}
-
-button {
-  margin: auto;
-}
 </style>

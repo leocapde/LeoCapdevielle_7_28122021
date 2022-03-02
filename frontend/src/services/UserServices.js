@@ -15,7 +15,6 @@ export default {
             localStorage.setItem('isAdmin', res.data.isAdmin)
             window.location = '/#/about';
           })
-        .catch(error => console.log(error))
     },
     signup(email, password, lastName, firstName) {
         return axios.post(`${baseUrl}/signup`, {
@@ -25,7 +24,6 @@ export default {
             firstName: firstName
         })
         .then(() => this.login(email, password))
-        .catch(error => console.log(error))
     },
     signout() {
         localStorage.removeItem('token')

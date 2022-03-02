@@ -6,11 +6,10 @@
 </template>
 
 <style>
-/* bg-second-color: #BA4D55; */
-
 body {
-  background: #D4D4D4;  /* $bg-color */
+  background: #b8cee5;
   margin: 0;
+  padding: 0 10px;
 }
 
 #app {
@@ -18,7 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* color: #2c3e50; */
-  color: #091F43; /* $text-color */
+  color: #091F43;
+  margin-bottom: 25px;
 }
 </style>
