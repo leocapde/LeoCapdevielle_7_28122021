@@ -1,10 +1,10 @@
 <template>
     <div id="about_header">
-            <img id="logo-about_header" alt="Groupomania logo" src="../assets/icon-left-font-monochrome-white.png">
-            <nav id="about-nav">
-                <button @click="setProfilId('')">Fil d'actualité</button>
-                <button @click="setProfilId(currentUser)">Mon profil</button>
-                <button @click="getSignout()">Déconnexion</button>
+            <img id="about_header-logo" alt="Groupomania logo" src="../assets/icon-left-font-monochrome-white.png" @click="setProfilId('')" />
+            <nav id="about_header-nav">
+                <div @click="setProfilId('')"><font-awesome-icon icon="fa-solid fa-house" /></div>
+                <div @click="setProfilId(currentUser)"><font-awesome-icon icon="fa-solid fa-user" /></div>
+                <div @click="getSignout()"><font-awesome-icon icon="fa-solid fa-power-off" /></div>
             </nav>
         </div>
 </template>
@@ -32,26 +32,45 @@ export default {
 
 <style>
 #about_header {
-    max-height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 2px 2px 10px;
-    padding: 0 20px;
+    padding: 0 15px;
+    margin: 0 -10px;
     background: #BA4D55;
 }
 
-#logo-about_header {
+#about_header-logo {
     max-width: 200px;
+    cursor: pointer;
 }
 
-#about-nav button {
+#about_header-logo:hover {
+    opacity: 0.6;
+}
+
+#about_header-logo:active {
+    transform: translateY(4px);
+}
+
+#about_header-nav {
+    display: flex;
+}
+
+#about_header-nav div {
     margin: 0 5px;
-    padding: 15px;
+    padding: 10px;
+    color: white;
     border-radius: 20px;
 }
 
-#about-nav button:hover {
-    background: #FFD7D7;
+#about_header-nav div:hover {
+    color: #091F43;
+    box-shadow: 0 2px 5px;
+}
+
+#about_header-nav div:active {
+    transform: translateY(4px);
 }
 </style>

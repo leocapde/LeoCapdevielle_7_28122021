@@ -25,7 +25,7 @@ exports.getAllPublicationCommentaries = (req, res, next) => {
 exports.deleteOneCommentary = (req, res, next) => {
     Commentary.findOne({ where: { id: req.params.id } })
     .then(commentary => {
-        if (commentary.dataValues.UserId === req.token.userId) {
+        if (commentary.dataValues.UserId === req.token.userId || req.token.isAdmin) {
             commentary.destroy();
             return res.status(200).json({ message: 'Commentaire supprimé !' }); 
         } else {
