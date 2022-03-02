@@ -4,6 +4,7 @@
             <img alt="photo de profil" :src="userProfil.imageUrl" v-if="userProfil.imageUrl">
             <img alt="photo de profil" src="../assets/icon.png" v-else >
             <div id="profil-name">{{ userProfil.firstName }} {{ userProfil.lastName}}</div>
+            <font-awesome-icon id="admin-icon" icon="fa-solid fa-shield" v-if="userProfil.isAdmin" />
         </div>
         <div id="profil-age" v-if="userProfil.age">
             <span class="profil-span">Age: </span>{{ userProfil.age }} ans
@@ -88,6 +89,11 @@ export default {
 #profil-name {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+#admin-icon {
+    margin: 0 5px;
+    color: goldenrod;
 }
 
 #profil-update-button {

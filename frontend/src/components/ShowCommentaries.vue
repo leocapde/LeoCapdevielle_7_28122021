@@ -6,7 +6,10 @@
                     <img alt="photo de profil" :src="commentary.User.imageUrl" v-if="commentary.User.imageUrl">
                     <img alt="photo de profil" src="../assets/icon.png" v-else >
                     <div class="commentary-header_user-infos">
-                        <div class="commentary-header_user-name" @click="setProfilId(commentary.UserId)">{{ commentary.User.firstName }} {{ commentary.User.lastName }}</div>
+                        <div class="commentary-header_user-name" @click="setProfilId(commentary.UserId)">
+                            {{ commentary.User.firstName }} {{ commentary.User.lastName }}
+                            <font-awesome-icon id="admin-icon" icon="fa-solid fa-shield" v-if="commentary.User.isAdmin" />
+                        </div>
                         <div class="commentary-header_user-date">{{ commentary.createdAt | formatDate }}</div>
                     </div>
                 </div>

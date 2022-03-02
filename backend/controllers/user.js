@@ -34,10 +34,14 @@ exports.login = (req, res, next) => {
                     res.status(200).json({
                         userId: user.dataValues.id,
                         token: jwt.sign(
-                            {userId: user.dataValues.id},
+                            {
+                                userId: user.dataValues.id,
+                                isAdmin: user.dataValues.isAdmin
+                            },
                             "my_secret_token",
                             {expiresIn: "24h"}
-                        )
+                        ),
+                        isAdmin: user.dataValues.isAdmin
                 })
                 }
             })
@@ -63,15 +67,23 @@ exports.modifyUser = (req, res, next) => {
     User.findOne({ where: { id: req.params.id }})
     .then(user => {
         if (user.dataValues.id === req.token.userId) {
-            if (user.imageUrl) {
-                const filename = user.imageUrl.split("/images/")[1];
-                fs.unlink(`images/${filename}`, () => {
+            if (req.file) {
+                if (user.imageUrl) {
+                    const oldFilename = user.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${oldFilename}`, () => {
+                        user.update({
+                            ...JSON.parse(req.body.user),
+                            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+                        })
+                    return res.status(200).json({ message: 'Utilisateur modifié !' });
+                })
+                } else {
                     user.update({
                         ...JSON.parse(req.body.user),
                         imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
                     })
                     return res.status(200).json({ message: 'Utilisateur modifié !' });
-                })
+                }
             } 
             else {
                 user.update({...JSON.parse(req.body.user)})

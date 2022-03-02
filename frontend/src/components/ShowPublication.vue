@@ -6,7 +6,10 @@
                     <img alt="photo de profil" :src="publication.User.imageUrl" v-if="publication.User.imageUrl">
                     <img alt="photo de profil" src="../assets/icon.png" v-else >
                     <div class="publication-header_user-infos">
-                        <div class="publication-header_user-name" @click="setProfilId(publication.UserId)">{{ publication.User.firstName }} {{ publication.User.lastName }}</div>
+                        <div class="publication-header_user-name" @click="setProfilId(publication.UserId)">
+                            {{ publication.User.firstName }} {{ publication.User.lastName }}
+                            <font-awesome-icon id="admin-icon" icon="fa-solid fa-shield" v-if="publication.User.isAdmin" />
+                        </div>
                         <div class="publication-header_user-date">{{ publication.createdAt | formatDate }}</div>
                     </div>
                 </div>

@@ -20,10 +20,10 @@ Vue.filter('formatDate', (date) => {
 // Composant pour pouvoir utiliser les icons FontAwesomme
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsis, faShield } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faEllipsis)
+library.add(faEllipsis, faShield)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

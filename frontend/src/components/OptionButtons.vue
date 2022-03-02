@@ -4,8 +4,8 @@
             <font-awesome-icon icon="fa-solid fa-ellipsis" />
         </div>
         <div id="option-select" v-if="option">
-            <div @click="deleteThis()" v-if="userId == currentUser">Supprimer</div>
-            <div v-if="userId == currentUser">Modifier</div>
+            <div @click="deleteThis()" v-if="userId == currentUser || isAdmin == 'true'">Supprimer</div>
+            <div v-if="userId == currentUser || isAdmin == 'true'">Modifier</div>
             <div @click="signalThis()" v-else>Signaler</div>
         </div>
     </div>
@@ -21,6 +21,7 @@ export default {
         return {
             option: false,
             currentUser: localStorage.getItem('userId'),
+            isAdmin: localStorage.getItem('isAdmin')
         }
     },
     props: {

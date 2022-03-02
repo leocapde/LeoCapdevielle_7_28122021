@@ -12,6 +12,7 @@ export default {
         .then(res => {
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('userId', res.data.userId);
+            localStorage.setItem('isAdmin', res.data.isAdmin)
             window.location = '/#/about';
           })
         .catch(error => console.log(error))
@@ -29,6 +30,7 @@ export default {
     signout() {
         localStorage.removeItem('token')
         localStorage.removeItem('userId')
+        localStorage.removeItem('isAdmin')
         window.location = '../'
     },
     getOneUser(userIdProfil) {

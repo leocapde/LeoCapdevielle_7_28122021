@@ -16,7 +16,7 @@ exports.createPublication = (req, res, next) => {
     else {
         Publication.create({
             UserId: req.token.userId,
-            description: req.body.description
+            description: JSON.parse(req.body.description)
         })
         .then(() => res.status(201).json({ message: 'Nouvel publication créée !' }))
         .catch(error => res.status(400).json({ error }))
@@ -24,7 +24,7 @@ exports.createPublication = (req, res, next) => {
 };
 
 exports.getAllPublications = (req, res, next) => {
-    const userAttributes = ['id', 'firstName', 'lastName', 'imageUrl']
+    const userAttributes = ['id', 'firstName', 'lastName', 'imageUrl', 'isAdmin']
     Publication.findAll({ 
         order: [
             ['createdAt', 'DESC'],
@@ -49,7 +49,7 @@ exports.getAllPublications = (req, res, next) => {
 };
 
 exports.getAllUserPublications = (req, res, next) => {
-    const userAttributes = ['id', 'firstName', 'lastName', 'imageUrl']
+    const userAttributes = ['id', 'firstName', 'lastName', 'imageUrl', 'isAdmin']
     Publication.findAll({ 
         where: { UserId: req.params.id },
         order: [
@@ -77,7 +77,7 @@ exports.getAllUserPublications = (req, res, next) => {
 exports.deletePublication = (req, res, next) => {
     Publication.findOne({ where: { id: req.params.id } })
     .then(publication => {
-        if (publication.dataValues.UserId === req.token.userId) {
+        if (publication.dataValues.UserId === req.token.userId || req.token.isAdmin) {
             if (publication.fileUrl) {
                 const filename = publication.fileUrl.split("/images/")[1]
                 fs.unlink(`images/${filename}`, () => {
