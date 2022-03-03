@@ -1,6 +1,6 @@
 <template>
     <div id="about_header">
-            <img id="about_header-logo" alt="Groupomania logo" src="../assets/icon-left-font-monochrome-white.png" @click="setProfilId('')" />
+            <img id="about_header-logo" alt="Groupomania logo" src="../assets/icon-left-font-monochrome-white.png" @click="reload()" />
             <nav id="about_header-nav">
                 <div @click="setProfilId('')"><font-awesome-icon icon="fa-solid fa-house" /></div>
                 <div @click="setProfilId(currentUser)"><font-awesome-icon icon="fa-solid fa-user" /></div>
@@ -25,7 +25,10 @@ export default {
         },
         ...mapActions({
             setProfilId: 'setProfilId'
-        })
+        }),
+        reload() {
+            location.reload()
+        }
     }
 }
 </script>

@@ -119,9 +119,12 @@ export default {
 
 #show_image {
     padding: 10px;
-    max-height: 500px;
-    max-width: 500px;
     object-fit: contain;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
 }
 
 

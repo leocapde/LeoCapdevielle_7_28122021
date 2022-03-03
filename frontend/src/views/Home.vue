@@ -132,10 +132,6 @@ export default {
     padding: 5px 10px;
 }
 
-/* .form-item input:optional {
-    background: lightgreen;
-} */
-
 .home-form label {
     font-weight: bold;
 }

@@ -1,35 +1,54 @@
 <template>
     <form id="post_publication" @submit.prevent>
         <div id="post_infos">
-            <textarea type="text" placeholder="Exprimez-vous !" rows="5" cols="100" v-model="description"></textarea>
-            <div id="buttons">
-                <button id="post-button" @click="postNewPublication()">Poster</button>
-                <label id="label-img" for="add-img-button">Photo</label>
-                <input type="file" id="add-img-button" @change="getFile" accept="image/*">
-            </div>
+            <img alt="photo de profil" :src="userProfil.imageUrl" v-if="userProfil.imageUrl">
+            <img alt="photo de profil" src="../assets/icon.png" v-else >
+            <textarea type="text" placeholder="Exprimez-vous !" wrap v-model="description"></textarea>
         </div>
         <img id="post_image" :src="this.fileUrl" v-if="this.fileUrl" >
+        <div id="post_options">
+            <label id="post_options-label-image" for="post_options-add-image" v-if="!this.fileUrl">
+                <font-awesome-icon icon="fa-solid fa-camera" />Ajouter une photo
+            </label>
+            <input type="file" id="post_options-add-image" @change="getFile" accept="image/*">
+            <div id="post_options-delete-image" v-if="this.fileUrl" @click="deleteFile()">
+                <font-awesome-icon icon="fa-solid fa-trash-can" />Supprimer l'image
+            </div>
+            <div id="post_options-send" @click="postNewPublication()">
+                <font-awesome-icon icon="fa-solid fa-paper-plane" />Poster la publication
+            </div>
+        </div>
     </form>
 </template>
 
 <script>
 import PublicationServices from '../services/PublicationServices'
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
     data() {
         return {
-            description: '',
+            description: null,
             file: null,
-            fileUrl: ''
+            fileUrl: null,
+            currentUser: localStorage.getItem('userId')
         }
     },
     watch: {
         fileUrl() {}
     },
+    mounted() {
+        this.setUserProfil(this.currentUser)
+    },
+    computed: {
+        ...mapState({
+            userProfil: 'userProfil',
+        })
+    },
     methods: {
         ...mapActions({
-            incrementChangeKey: 'incrementChangeKey'
+            incrementChangeKey: 'incrementChangeKey',
+            setUserProfil: 'setUserProfil'
         }),
         async postNewPublication() {
             await PublicationServices.postPublication(this.description, this.file)
@@ -37,8 +56,14 @@ export default {
         },
         getFile(event) {
             let image = event.target.files[0]
-            this.fileUrl = URL.createObjectURL(image)
-            this.file = image
+            if (image) {
+                this.fileUrl = URL.createObjectURL(image)
+                this.file = image
+            }
+        },
+        deleteFile() {
+            this.file = null
+            this.fileUrl = null
         }
     }
 }
@@ -51,8 +76,8 @@ export default {
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-    margin: 10px 0;
-    background: #FFD7D7;
+    margin: 25px 0 35px 0;
+    background: white;
     box-shadow: 2px 2px 10px;
 }
 
@@ -61,45 +86,80 @@ export default {
     width: 100%;
 }
 
-#post_image {
-    padding: 10px;
-    max-height: 500px;
-    max-width: 500px;
-    object-fit: contain;
+#post_infos > img {
+    width: 100%;
+    max-width: 60px;
+    max-height: 60px;
+    object-fit: cover;
+    padding: 1px;
+    border-radius: 60px;
+    margin-right: 10px;
 }
 
 #post_infos textarea {
-    border-radius: 20px 0 0 20px;
+    border-radius: 20px;
     padding: 10px;
-}
-
-#buttons {
-    margin: 0;
-}
-
-#post_publication button:hover {
-    background: #FFD7D7;
-}
-
-#post-button {
-    border-radius: 0 20px 0 0;
     width: 100%;
-    height: 50%;
+    resize: none;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
 }
 
-#label-img {
-    border-radius: 0 0 20px 0;
-    border: 2px solid black;
+#post_infos textarea::-webkit-scrollbar {
+    display: none; /* Chrome - Opera - Safari */
+}
+
+#post_options {
+    margin: 10px 0;
     width: 100%;
-    height: 50%;
-    background: lightgray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#label-img:hover {
-    background: #FFD7D7;
+#post_options-label-image, 
+#post_options-delete-image, 
+#post_options-send {
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px black;
+    margin: 0 10px;
+    width: 100%;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
 }
 
-#add-img-button{
+.fa-camera,
+.fa-trash-can,
+.fa-paper-plane {
+    margin-right: 5px;
+}
+
+#post_options-label-image:hover, 
+#post_options-delete-image:hover, 
+#post_options-send:hover {
+    background: #BA4D55;
+    color: white;
+}
+
+#post_options-label-image:active, 
+#post_options-delete-image:active, 
+#post_options-send:active {
+    transform: translateY(4px);
+}
+
+#post_options-add-image{
     display: none;
+}
+
+#post_image {
+    padding: 10px 0;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: contain;
 }
 </style>

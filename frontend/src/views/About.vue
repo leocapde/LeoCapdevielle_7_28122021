@@ -6,7 +6,6 @@
             <PostPublication v-if="!profilId" :key="changeKey +2" />
             <Profil v-else :profilId="profilId" :key="changeKey" />
             <ProfilModification v-if="profilModification" :profilId="profilId" />
-
             <ShowPublication :profilId="profilId" :key="changeKey +1" />
         </div>
     </div>
@@ -45,7 +44,7 @@ export default {
 
 <style>
 #about_body {
-    max-width: 650px;
+    max-width: 750px;
     margin: auto;
 }
 </style>
