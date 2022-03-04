@@ -15,11 +15,11 @@
       </div>
       <div class="form-item">
         <label for="lastName">Nom :</label>
-        <input type="text" name="lastName" id="lastName" v-model="lastName" required minlength="2">
+        <input type="text" name="lastName" id="lastName" v-model="lastName" required minlength="2" maxlength="20">
       </div>
       <div class="form-item">
         <label for="firstName">Prénom :</label>
-        <input type="text" name="firstName" id="firstName" v-model="firstName" required minlength="2">
+        <input type="text" name="firstName" id="firstName" v-model="firstName" required minlength="2" maxlength="20">
       </div>
       <span class="error">{{ this.error }}</span>
       <input type="submit" class="form-submit" value="S'inscrire" />
