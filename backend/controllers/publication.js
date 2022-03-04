@@ -4,10 +4,11 @@ const Commentary = require('../models/Commentary')
 const fs = require('fs');
 
 exports.createPublication = (req, res, next) => {
+    const text = JSON.parse(req.body.description)
     if (req.file) {
         Publication.create({
             UserId: req.token.userId,
-            description: JSON.parse(req.body.description),
+            description: text,
             fileUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
         })
         .then(() => res.status(201).json({ message: 'Nouvel publication créée !' }))
@@ -16,7 +17,7 @@ exports.createPublication = (req, res, next) => {
     else {
         Publication.create({
             UserId: req.token.userId,
-            description: JSON.parse(req.body.description)
+            description: text
         })
         .then(() => res.status(201).json({ message: 'Nouvel publication créée !' }))
         .catch(error => res.status(400).json({ error }))

@@ -3,19 +3,19 @@
         <div id="post_infos">
             <img alt="photo de profil" :src="userProfil.imageUrl" v-if="userProfil.imageUrl">
             <img alt="photo de profil" src="../assets/icon.png" v-else >
-            <textarea type="text" placeholder="Exprimez-vous !" wrap v-model="description"></textarea>
+            <textarea type="text" placeholder="Exprimez-vous !" maxlength="9999" v-model="description"></textarea>
         </div>
         <img id="post_image" :src="this.fileUrl" v-if="this.fileUrl" >
         <div id="post_options">
             <label id="post_options-label-image" for="post_options-add-image" v-if="!this.fileUrl">
-                <font-awesome-icon icon="fa-solid fa-camera" />Ajouter une photo
+                <font-awesome-icon icon="fa-solid fa-camera" class="post_options-icon" />Ajouter une photo
             </label>
             <input type="file" id="post_options-add-image" @change="getFile" accept="image/*">
             <div id="post_options-delete-image" v-if="this.fileUrl" @click="deleteFile()">
-                <font-awesome-icon icon="fa-solid fa-trash-can" />Supprimer l'image
+                <font-awesome-icon icon="fa-solid fa-trash-can" class="post_options-icon" />Supprimer l'image
             </div>
             <div id="post_options-send" @click="postNewPublication()">
-                <font-awesome-icon icon="fa-solid fa-paper-plane" />Poster la publication
+                <font-awesome-icon icon="fa-solid fa-paper-plane" class="post_options-icon" />Poster la publication
             </div>
         </div>
     </form>
@@ -91,13 +91,13 @@ export default {
     max-width: 60px;
     max-height: 60px;
     object-fit: cover;
-    padding: 1px;
     border-radius: 60px;
     margin-right: 10px;
+    box-shadow: 0 2px 5px black;
 }
 
 #post_infos textarea {
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 10px;
     width: 100%;
     resize: none;
@@ -129,11 +129,10 @@ export default {
     display: flex;
     justify-content: center;
     font-weight: bold;
+    cursor: pointer;
 }
 
-.fa-camera,
-.fa-trash-can,
-.fa-paper-plane {
+.post_options-icon {
     margin-right: 5px;
 }
 

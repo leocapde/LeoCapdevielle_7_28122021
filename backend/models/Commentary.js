@@ -10,7 +10,7 @@ Commentary.init({
         autoIncrement: true,
         primaryKey: true
     },
-    description: { type: Sequelize.STRING, allowNull: false }
+    description: { type: Sequelize.STRING(10000), allowNull: false }
 }, {
     sequelize,
     modelName: 'Commentary',

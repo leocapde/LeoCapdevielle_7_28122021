@@ -1,12 +1,18 @@
 <template>
     <div id="option" @mouseleave="leaveOption()">
-        <div id="option-button" @click="getOption()">
+        <div id="option_button" @click="getOption()">
             <font-awesome-icon icon="fa-solid fa-ellipsis" />
         </div>
-        <div id="option-select" v-if="option">
-            <div @click="deleteThis()" v-if="userId == currentUser || isAdmin == 'true'">Supprimer</div>
-            <div v-if="userId == currentUser || isAdmin == 'true'">Modifier</div>
-            <div @click="signalThis()" v-else>Signaler</div>
+        <div id="option_select" v-if="option">
+            <div id="option_select-delete" @click="deleteThis()" v-if="userId == currentUser || isAdmin == 'true'">
+                <font-awesome-icon icon="fa-solid fa-trash-can" class="option_select--icon" />Supprimer
+            </div>
+            <div id="option_select-update" v-if="userId == currentUser || isAdmin == 'true'">
+                <font-awesome-icon icon="fa-solid fa-pen-to-square" class="option_select--icon" />Modifier
+            </div>
+            <div id="option_select-report" @click="signalThis()" v-else>
+                <font-awesome-icon icon="fa-solid fa-flag" class="option_select--icon" />Signaler
+            </div>
         </div>
     </div>
 </template>
@@ -67,42 +73,64 @@ export default {
 #option {
     position: relative;
     right: 0px;
+    cursor: pointer;
 }
 
-#option-button {
+#option_button {
     color: gray;
     font-size: 1.5rem;
     border-radius: 20px;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#option-button:focus {
+#option_button:focus {
     color: black;
 }
 
-#option-button:hover {
-    background: lightgray;
+#option_button:hover {
+    box-shadow: 0 2px 5px black;
 }
 
-#option-select {
+#option_button:active {
+    transform: translateY(3px);
+}
+
+#option_select {
     position: absolute;
     right: 0;
-    border: 1px solid black;
     border-radius: 10px;
     background: white;
     box-shadow: 2px 2px 10px;
     padding: 5px;
+    z-index: 999;
 }
 
-#option-select > div {
+#option_select-delete,
+#option_select-update,
+#option_select-report {
     padding: 5px;
+    display: flex;
 }
 
-#option-select > div:hover {
-    color: #BA4D55;
+#option_select-delete:hover,
+#option_select-update:hover,
+#option_select-report:hover {
+    background: #BA4D55;
+    color: white;
+    border-radius: 5px;
+}
+
+#option_select-delete:active,
+#option_select-update:active,
+#option_select-report:active {
+    transform: translateY(2px);
+}
+
+.option_select--icon{
+    margin-right: 5px;
 }
 </style>

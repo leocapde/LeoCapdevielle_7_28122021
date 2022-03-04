@@ -78,12 +78,13 @@ export default {
 }
 
 #profil-header > img {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    max-width: 150px;
+    max-height: 150px;
     object-fit: cover;
-    padding: 1px;
     border-radius: 150px;
     margin-right: 10px;
+    box-shadow: 0 2px 5px black;
 }
 
 #profil-name {

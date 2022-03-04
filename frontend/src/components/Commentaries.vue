@@ -1,5 +1,6 @@
 <template>
     <div id="commentaries">
+        
         <ShowCommentaries :commentaries="commentaries"/>
         <PostCommentary :publicationId="publicationId"/>
     </div>
@@ -28,10 +29,5 @@ export default {
 </script>
 
 <style>
-#commentaries {
-    border-radius: 20px;
-    margin: 10px;
-    padding: 1px 0;
-    background: gray;
-}
+
 </style> 

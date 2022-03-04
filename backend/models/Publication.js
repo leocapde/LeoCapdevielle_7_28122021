@@ -10,7 +10,7 @@ Publication.init({
         autoIncrement: true,
         primaryKey: true
     },
-    description: { type: Sequelize.STRING },
+    description: { type: Sequelize.STRING(10000) },
     fileUrl: { type: Sequelize.STRING }
 }, {
     sequelize,

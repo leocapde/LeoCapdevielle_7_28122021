@@ -1,27 +1,27 @@
 <template>
     <div id="show_publications">
         <div class="publication" v-for="publication in publicationList" :key="publication.id">
-            <div class="publication-header">
-                <div class="publication-header_user">
-                    <img alt="photo de profil" :src="publication.User.imageUrl" v-if="publication.User.imageUrl">
-                    <img alt="photo de profil" src="../assets/icon.png" v-else >
-                    <div class="publication-header_user-infos">
-                        <div class="publication-header_user-name" @click="setProfilId(publication.UserId)">
+            <div class="publication_header">
+                <div class="publication_header-infos">
+                    <img class="publication_header-infos--image" alt="photo de profil" :src="publication.User.imageUrl" v-if="publication.User.imageUrl">
+                    <img class="publication_header-infos--image" alt="photo de profil" src="../assets/icon.png" v-else >
+                    <div class="publication_header-infos--user">
+                        <div class="publication_header-infos--user-name" @click="setProfilId(publication.UserId)">
                             {{ publication.User.firstName }} {{ publication.User.lastName }}
                             <font-awesome-icon id="admin-icon" icon="fa-solid fa-shield" v-if="publication.User.isAdmin" />
                         </div>
-                        <div class="publication-header_user-date">{{ publication.createdAt | formatDate }}</div>
+                        <div class="publication_header-infos--date">{{ publication.createdAt | formatDate }}</div>
                     </div>
                 </div>
-                <div class="publication-header_option">
+                <div class="publication_header-option">
                     <OptionButtons :userId="publication.UserId" :publicationId="publication.id" />
                 </div>
             </div>
-            <div class="publication-body">
-                <div class="publication-body_description">{{ publication.description }}</div>
-                <img id="show_image" :src="publication.fileUrl" v-if="publication.fileUrl" >
-                <Commentaries :commentaries="publication.Commentaries" :publicationId="publication.id"/>
+            <div class="publication_body">
+                <div class="publication_body-description">{{ publication.description }}</div>
+                <img class="publication_body-image" :src="publication.fileUrl" v-if="publication.fileUrl" >
             </div>
+            <Commentaries class="publication_commentaries" :commentaries="publication.Commentaries" :publicationId="publication.id"/>
         </div>
     </div>
 </template>
@@ -80,44 +80,64 @@ export default {
     flex-flow: column;
 }
 
-.publication-header {
+.publication_header {
     padding: 10px;
     text-align: start;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
+    border-radius: 20px 20px 0 0;
+    /* box-shadow: 0px 2px 5px; */
 }
 
-.publication-header_user {
+.publication_header-infos {
     display: flex;
     align-items: center;
 }
 
-.publication-header_user > img {
+.publication_header-infos--image {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    padding: 1px;
     border-radius: 60px;
     margin-right: 10px;
+    box-shadow: 0 2px 5px black;
 }
 
-.publication-header_user-name {
+.publication_header-infos--user-name {
     font-weight: bold;
     font-size: 1.1rem;
     width: fit-content;
+    cursor: pointer;
 }
 
-.publication-header_user-name:hover {
+.publication_header-infos--user-name:hover {
     color: #BA4D55;
 }
 
-.publication-header_user-date {
+.publication_header-infos--date {
     font-size: 0.8rem;
 }
 
-#show_image {
+.publication_body {
+    /* border-radius: 20px; */
+    /* background: lightblue; */
+    width: 100%;
+    /* box-shadow: 2px 2px 10px; */
+    margin-bottom: 5px;
+}
+
+.publication_body-description {
+    padding: 10px;
+    /* margin: 20px 10px; */
+    /* border-radius: 20px; */
+    /* background: lightcyan; */
+    text-align: start;
+    /* box-shadow: 2px 2px 10px; */
+}
+
+.publication_body-image {
     padding: 10px;
     object-fit: contain;
     padding: 0;
@@ -125,21 +145,10 @@ export default {
     height: 100%;
     max-width: 400px;
     max-height: 400px;
-}
-
-
-.publication-body {
+    /* border: 1px solid black; */
     border-radius: 20px;
-    background: lightblue;
-    width: 100%;
-}
-
-.publication-body_description {
-    padding: 10px;
-    margin: 20px 10px;
-    border-radius: 20px;
-    background: lightcyan;
-    text-align: start;
-    box-shadow: 2px 2px 10px;
+    box-shadow: 1px 1px 5px;
+    margin-top: 5px;
+    /* margin: 5px 10px 0 10px; */
 }
 </style> 
