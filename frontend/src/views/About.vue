@@ -4,7 +4,7 @@
 
         <div id="about_body">
             <PostPublication v-if="!profilId" :key="changeKey +2" />
-            <Profil v-else :profilId="profilId" :key="changeKey" />
+            <Profil v-if="profilId" :profilId="profilId" :key="changeKey" />
             <ProfilModification v-if="profilModification" :profilId="profilId" />
             <ShowPublication :profilId="profilId" :key="changeKey +1" />
             <UpdatePublication v-if="publicationModification" :publication="publication" />

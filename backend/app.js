@@ -1,12 +1,10 @@
 const express = require('express');
-const sequelize = require('./config/database');
+// const sequelize = require('./config/database');
 const path = require('path')
 
 const userRoutes = require('./routes/user');
 const publiationRoutes = require('./routes/publication');
 const commentaryRoutes = require('./routes/commentary');
-
-// sequelize.sync({ alter: true });
 
 const app = express();
 
