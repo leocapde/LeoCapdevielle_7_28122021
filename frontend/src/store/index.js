@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import CommentaryServices from '../services/CommentaryServices'
 
 import PublicationServices from '../services/PublicationServices'
 import UserServices from '../services/UserServices'
@@ -15,6 +16,10 @@ export default new Vuex.Store({
     userProfil: {},
     profilModification: false,
     changeKey: 0,
+    publicationModification: false,
+    publication: {},
+    commentaryModification: false,
+    commentary: {}
   },
   mutations: {
     SET_HOME_MODE(state, payload){
@@ -34,6 +39,18 @@ export default new Vuex.Store({
     },
     INCREMENT_CHANGE_KEY(state){
       state.changeKey++
+    },
+    SET_PUBLICATION_MODIFICATION(state, payload){
+      state.publicationModification = payload;
+    },
+    SET_PUBLICATION(state, payload) {
+      state.publication = payload
+    },
+    SET_COMMENTARY_MODIFICATION(state, payload){
+      state.commentaryModification = payload;
+    },
+    SET_COMMENTARY(state, payload) {
+      state.commentary = payload
     }
   },
   actions: {
@@ -62,6 +79,20 @@ export default new Vuex.Store({
     },
     incrementChangeKey(context) {
       context.commit('INCREMENT_CHANGE_KEY')
+    },
+    setPublicationModification(context, payload) {
+      context.commit('SET_PUBLICATION_MODIFICATION', payload)
+    },
+    async setOnePublication(context, publicationId) {
+      const publication = await PublicationServices.getOnePublication(publicationId)
+      context.commit('SET_PUBLICATION', publication.data.publication)
+    },
+    setCommentaryModification(context, payload) {
+      context.commit('SET_COMMENTARY_MODIFICATION', payload)
+    },
+    async setOneCommentary(context, commentaryId) {
+      const commentary = await CommentaryServices.getOneCommentary(commentaryId)
+      context.commit('SET_COMMENTARY', commentary.data)
     }
   }
 })

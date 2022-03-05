@@ -7,6 +7,8 @@
             <Profil v-else :profilId="profilId" :key="changeKey" />
             <ProfilModification v-if="profilModification" :profilId="profilId" />
             <ShowPublication :profilId="profilId" :key="changeKey +1" />
+            <UpdatePublication v-if="publicationModification" :publication="publication" />
+            <UpdateCommentary v-if="commentaryModification" :commentary="commentary" />
         </div>
     </div>
 </template>
@@ -17,6 +19,8 @@ import PostPublication from '../components/PostPublication.vue'
 import ShowPublication from '../components/ShowPublication.vue'
 import Profil from '../components/Profil.vue'
 import ProfilModification from '../components/ProfilModification.vue'
+import UpdatePublication from '../components/UpdatePublication.vue'
+import UpdateCommentary from '../components/UpdateCommentary.vue'
 
 import { mapState } from 'vuex'
 
@@ -27,13 +31,19 @@ export default {
         PostPublication,
         ShowPublication,
         Profil,
-        ProfilModification
+        ProfilModification,
+        UpdatePublication,
+        UpdateCommentary
     },
     computed: {
         ...mapState({
             profilId: 'profilId',
             profilModification: 'profilModification',
-            changeKey: 'changeKey'
+            changeKey: 'changeKey',
+            publicationModification: 'publicationModification',
+            publication: 'publication',
+            commentaryModification: 'commentaryModification',
+            commentary: 'commentary'
         })
     },
     watch: {

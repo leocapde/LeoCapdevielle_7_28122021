@@ -10,9 +10,9 @@ exports.createCommentary = (req, res, next) => {
     .catch(error => res.status(400).json({ error }))
 };
 
-exports.getAllCommentaries = (req, res, next) => {
-    Commentary.findAll()
-    .then(commentaries => res.status(200).json( commentaries ))
+exports.getOneCommentary = (req, res, next) => {
+    Commentary.findOne({ where: { id: req.params.id }})
+    .then(commentary => res.status(200).json( commentary ))
     .catch(error => res.status(500).json({ error }))
 };
 
@@ -21,6 +21,17 @@ exports.getAllPublicationCommentaries = (req, res, next) => {
     .then(commentaries => res.status(200).json( commentaries ))
     .catch(error => res.status(500).json({ error }))
 };
+
+exports.updateCommentary = (req, res, next) => {
+    Commentary.findOne({ where: { id: req.params.id }})
+    .then(commentary => {
+        if (commentary.dataValues.UserId === req.token.userId || req.token.isAdmin) {
+            commentary.update({ description: req.body.description })
+            return res.status(200).json({ message: 'Commentaire modifié !' });
+        }
+    })
+    .catch(error => res.status(500).json({ error }))
+}
 
 exports.deleteOneCommentary = (req, res, next) => {
     Commentary.findOne({ where: { id: req.params.id } })

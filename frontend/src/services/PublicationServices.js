@@ -18,6 +18,13 @@ export default {
             }
         })
     },
+    getOnePublication(publicationId) {
+        return axios.get(`${baseUrl}/update/${publicationId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+    },
     postPublication(description, image) {
         const formData  = new FormData()
         formData.append('description', JSON.stringify(description))
@@ -27,7 +34,18 @@ export default {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'multipart/form-data; boundary=MyBoundary'
             },
-        } )
+        })
+    },
+    updatePublication(publicationId, description, image) {
+        const formData  = new FormData()
+        formData.append('description', JSON.stringify(description))
+        formData.append('image', image)
+        return axios.put(`${baseUrl}/${publicationId}`, formData, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data; boundary=MyBoundary'
+            },
+        })
     },
     deletePublication(publicationId) {
         return axios.delete(`${baseUrl}/${publicationId}`, {

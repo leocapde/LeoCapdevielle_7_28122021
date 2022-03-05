@@ -66,7 +66,7 @@ exports.getOneUser = (req, res, next) => {
 exports.modifyUser = (req, res, next) => {
     User.findOne({ where: { id: req.params.id }})
     .then(user => {
-        if (user.dataValues.id === req.token.userId) {
+        if (user.dataValues.id === req.token.userId || req.token.isAdmin) {
             if (req.file) {
                 if (user.imageUrl) {
                     const oldFilename = user.imageUrl.split("/images/")[1];
@@ -75,8 +75,8 @@ exports.modifyUser = (req, res, next) => {
                             ...JSON.parse(req.body.user),
                             imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
                         })
-                    return res.status(200).json({ message: 'Utilisateur modifié !' });
-                })
+                        return res.status(200).json({ message: 'Utilisateur modifié !' });
+                    })
                 } else {
                     user.update({
                         ...JSON.parse(req.body.user),
@@ -99,7 +99,7 @@ exports.modifyUser = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
     User.findOne({ where: { id: req.params.id }})
     .then(user => {
-        if (user.dataValues.id === req.token.userId) {
+        if (user.dataValues.id === req.token.userId || req.token.isAdmin) {
             if (user.imageUrl) {
                 const filename = user.imageUrl.split("/images/")[1];
                 fs.unlink(`images/${filename}`, () => {

@@ -4,7 +4,6 @@
             <div id="profil_modification-body">
                 <h1 id="profil_modification-header">Modification du profil</h1>
                 <form id="profil_modification-form" @submit.prevent>
-                    
                     <div class="form-item" id="photo-profil">
                         <label for="imageUrl">Photo de profil :</label>
                         <label for="imageUrl">
@@ -13,7 +12,6 @@
                         </label>
                         <input type="file" name="imageUrl" id="imageUrl" @change="changeImage" accept="image/*">
                     </div>
-                    
                     <div class="form-item">
                         <label for="lastName">Nom :</label>
                         <input type="text" name="lastName" id="lastName" v-model="user.lastName" required minlength="2" maxlength="20">
@@ -152,7 +150,7 @@ export default {
 #profil_modification-form {
     display: flex;
     flex-direction: column;
-    max-width: 500px;
+    max-width: 600px;
     align-content: center;
     margin: auto;
 }

@@ -88,7 +88,6 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     border-radius: 20px 20px 0 0;
-    /* box-shadow: 0px 2px 5px; */
 }
 
 .publication_header-infos {
@@ -121,20 +120,13 @@ export default {
 }
 
 .publication_body {
-    /* border-radius: 20px; */
-    /* background: lightblue; */
     width: 100%;
-    /* box-shadow: 2px 2px 10px; */
     margin-bottom: 5px;
 }
 
 .publication_body-description {
     padding: 10px;
-    /* margin: 20px 10px; */
-    /* border-radius: 20px; */
-    /* background: lightcyan; */
     text-align: start;
-    /* box-shadow: 2px 2px 10px; */
 }
 
 .publication_body-image {
@@ -145,10 +137,8 @@ export default {
     height: 100%;
     max-width: 400px;
     max-height: 400px;
-    /* border: 1px solid black; */
     border-radius: 20px;
     box-shadow: 1px 1px 5px;
     margin-top: 5px;
-    /* margin: 5px 10px 0 10px; */
 }
 </style> 

@@ -64,7 +64,6 @@ export default {
 
 .commentary_infos {
     border-radius: 10px;
-    /* background: hsla(211, 46%, 81%, 0.4); */
     background: rgba(211, 211, 211, 0.45);
     display: flex;
     flex-direction: column;

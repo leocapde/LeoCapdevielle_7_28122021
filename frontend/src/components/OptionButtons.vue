@@ -7,7 +7,7 @@
             <div id="option_select-delete" @click="deleteThis()" v-if="userId == currentUser || isAdmin == 'true'">
                 <font-awesome-icon icon="fa-solid fa-trash-can" class="option_select--icon" />Supprimer
             </div>
-            <div id="option_select-update" v-if="userId == currentUser || isAdmin == 'true'">
+            <div id="option_select-update" @click="updateThis()" v-if="userId == currentUser || isAdmin == 'true'">
                 <font-awesome-icon icon="fa-solid fa-pen-to-square" class="option_select--icon" />Modifier
             </div>
             <div id="option_select-report" @click="signalThis()" v-else>
@@ -23,6 +23,8 @@ import CommentaryServices from '../services/CommentaryServices'
 import { mapActions } from 'vuex'
 
 export default {
+    components: {
+    },
     data() {
         return {
             option: false,
@@ -37,7 +39,11 @@ export default {
     },
     methods: {
         ...mapActions({
-            incrementChangeKey: 'incrementChangeKey'
+            incrementChangeKey: 'incrementChangeKey',
+            setPublicationModification: 'setPublicationModification',
+            setOnePublication: 'setOnePublication',
+            setCommentaryModification: 'setCommentaryModification',
+            setOneCommentary: 'setOneCommentary'
         }),
         getOption() {
             if (!this.option) {
@@ -60,6 +66,15 @@ export default {
                     PublicationServices.deletePublication(this.publicationId)
                     this.incrementChangeKey()
                 }
+            }
+        },
+        updateThis() {
+            if (this.commentaryId) {
+                this.setCommentaryModification(true)
+                this.setOneCommentary(this.commentaryId)
+            } else if (this.publicationId) {
+                this.setPublicationModification(true)
+                this.setOnePublication(this.publicationId)
             }
         },
         signalThis() {
